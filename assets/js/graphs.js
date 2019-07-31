@@ -35,7 +35,12 @@ function mybarplot(dataset) {
                   .attr("width", w + margin.left + margin.right)
                   .attr("height", h + margin.top + margin.bottom)
                   .append("g")
-                  .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+                  .attr("transform",`translate(${margin.left},${margin.top})`);
+    
+    // // sort data
+    // data.sort(function(b, a) {
+    //     return a.Value - b.Value;
+    // });
     
     // X axis
     var x = d3.scaleBand()
@@ -43,9 +48,14 @@ function mybarplot(dataset) {
                 .domain(dataset.map(function(d) { return d.Make; }))
                 .padding(0.2);
     
+    // translate moves axis to bottom of chart
+    // this means the axis is actually in the bottom margin
     svg.append('g')
-       .call(d3.axisBottom(x));
-    
+       .attr('transform', `translate(0, ${h})`)
+       .call(d3.axisBottom(x))
+       .selectAll("text")
+       .attr("transform", "translate(-10,0)rotate(-45)")
+       .style("text-anchor", "end");
 
     // Add Y axis
     var y = d3.scaleLinear()
@@ -68,8 +78,11 @@ function mybarplot(dataset) {
     
     
     
-    
-    
+// add gridlines https://blog.risingstack.com/d3-js-tutorial-bar-charts-with-javascript/
+// add labels
+// add interactivity
+// add colors and fonts
+// https://blog.risingstack.com/tutorial-d3-js-calendar-heatmap/
     
     
     
