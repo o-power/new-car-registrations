@@ -9,9 +9,11 @@ function makeGraphs(dataset) {
     dataset.forEach(function(d) {
         // convert Units from string to integer
         d.Units = parseInt(d.Units);
+        d.Year = new Date(d.Year);
     });
-    
-    mybarplot(dataset);
+
+    mybarplot(dataset.filter(function (d) { return d.Year.getFullYear() == 2019; }));
+    mystackedareaplot(dataset);
     //mytreemap(data);
     
     console.log(dataset[0]);
@@ -65,7 +67,7 @@ function mybarplot(dataset) {
 
     // y-axis scale
     var yScale = d3.scaleLinear()
-                   .domain([0, 15000])
+                   .domain([0, d3.max(dataset, function(d) { return d.Units; })])
                    .range([height, 0]);
     
     // append y-axis to the svg object
@@ -91,6 +93,33 @@ function mybarplot(dataset) {
 
 }
 
+function mystackedareaplot(dataset) {
+    const margin = {top: 30, right: 30, bottom: 70, left: 60};
+    const width = 460 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    const svg = d3.select("#mystackedareaplot")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform",`translate(${margin.left},${margin.top})`);
+    
+    // group the data: one array for each value of the X axis.
+    const sumstat = d3.nest()
+                      .key(function(d) { return d.Year; })
+                      .entries(dataset);
+
+    console.log(sumstat);
+       // var mygroups = ["Helen", "Amanda", "Ashley"] // list of group names
+ //    var mygroup = [1,2,3] // list of group names
+//    var stackedData = d3.stack()
+    //.keys(mygroup)
+    //.value(function(d, key){
+     // return d.values[key].n
+    //})
+    //(sumstat)
+}
 
 // function mytreemap(data) {
 //     // Treemap https://www.d3-graph-gallery.com/graph/treemap_basic.html
