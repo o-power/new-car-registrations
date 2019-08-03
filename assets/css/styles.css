@@ -9,6 +9,11 @@
 }
 
 .white-ivory {
-    fill: #FFFFFF;
-    stroke: #808080;
+  fill: #FFFFFF;
+  stroke: #808080;
+}
+
+.silver-aluminium {
+  fill: #C0C0C0;
+  stroke: #C0C0C0;
 }
