@@ -60,6 +60,40 @@ function makeGraphs2(dataset) {
 //=================================================
 function mybumpchart(dataset) {
     // http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a
+    
+    //// For each row, calculate the "finishing" position
+    //   // first sort, year, then points, then goals_for
+    //   data.sort(function(a, b) {
+    //     if(b['year'] != a['year']) {
+    //       return b['year'] - a['year'];
+    //     }
+    //     if(b['points'] != a['points']) {
+    //       return b['points'] - a['points'];
+    //     }
+    //     if(b['goals_for'] != a['goals_for']) {
+    //       return b['goals_for'] - a['goals_for'];
+    //     }
+    //   });
+    
+    //   // Then add the position with a simple integer increment
+    //   // now that the data is "in order"
+    //   var pos = 1;
+    //   data[0].position = pos;
+    //   for(var i=1; i<data.length; i++) {
+    //     // this is a new year, so start over
+    //     if(data[i - 1].year != data[i].year) {
+    //       pos = 1;
+    //     } else {
+    //       pos++;
+    //     }
+    //     data[i].position = pos;
+    //   }
+
+    // add a css safe class for use in hover interactions and coloring
+    dataset.forEach(function(d) {
+        d.Class = d.Colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-');
+    })
+    
     const margin = { top: 35, right: 0, bottom: 30, left: 70 };
     const width = 960 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
@@ -143,7 +177,7 @@ function mybumpchart(dataset) {
         
     }); // for each colour
     
-    var node = chart.append("g")
+    const node = chart.append("g")
                     .selectAll("circle")
                     .data(dataset)
                     .enter()
@@ -159,95 +193,41 @@ function mybumpchart(dataset) {
                     .attr("stroke-width", 1.5)
                     .attr('opacity', '0.6');
                     
-                    
-//           ///////////////////////
-//   // Tooltips
-//   var tooltip = d3.select("body").append("div")
-//       .attr("class", "tooltip");
+    // tooltips
+    const tooltip = d3.select("body")
+                      .append("div")
+                      .attr("class", "tooltip");
 
-//   chart.selectAll("circle")
-//       .on("mouseover", function(d) {
-//         chart.selectAll('.' + d['class'])
-//             .classed('active', true);
+    chart.selectAll("circle")
+         .on("mouseover", function(d) {
+            chart.selectAll('.' + d.Class)
+            .classed('active', true);
 
-//         var tooltip_str = "Club: " + d['club'] +
-//                 "<br/>" + "Year: " + d['year'] +
-//                 "<br/>" + "Points: " + d['points'] +
-//                 "<br/>" + "W/L/T: " + d['wins'] + " / " + d['losses'] + " / " + d['ties'] +
-//                 "<br/>" + "Goals F/A: " + d['goals_for'] + " / " + d['goals_against'];
+            const tooltip_str = "Colour: " + d.Colour +
+                                "<br/>" + "Year: " + d.Year +
+                                "<br/>" + "Units: " + d.Units +
+                                "<br/>" + "Rank: " + d.Rank;
 
-//         if(d['alias'] != '') {
-//           tooltip_str += "<br/>(aka: " + d['alias'] + ")";
-//         }
+            tooltip.html(tooltip_str)
+                   .style("visibility", "visible");
+         })
+         .on("mousemove", function(d) {
+            tooltip.style("top", event.pageY - (tooltip.node().clientHeight + 5) + "px")
+                   .style("left", event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+         })
+         .on("mouseout", function(d) {
+            chart.selectAll('.'+d.Class)
+                 .classed('active', false);
 
-//         tooltip.html(tooltip_str)
-//             .style("visibility", "visible");
-//       })
-//       .on("mousemove", function(d) {
-//         tooltip.style("top", event.pageY - (tooltip.node().clientHeight + 5) + "px")
-//             .style("left", event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
-//       })
-//       .on("mouseout", function(d) {
-//         chart.selectAll('.'+d['class'])
-//             .classed('active', false);
-
-//         tooltip.style("visibility", "hidden");
-//       })
-//       .on('click', function(d) {
-//         chart.selectAll('.' + d['class'])
-//             .classed('click-active', function(d) {
-//               // toggle state
-//               return !d3.select(this).classed('click-active');
-//             });
-//       })
-
-// });
-// </script>
-
-// <style>
-
-// .click-active, .active {
-//   opacity: 1.0;
-//   stroke-opacity: 1.0;
-//   z-index: 1000;
-//   /*r: 8;*/
-// }
-
-// path.click-active {
-//   stroke-width: 3.0;
-// }
-
-// path.active {
-//   stroke-width: 3.0;
-// }
-
-// .axis text {
-//   font: 10px sans-serif;
-// }
-
-// .axis path,
-// .axis line {
-//   fill: none;
-//   stroke: #000;
-//   shape-rendering: crispEdges;
-// }
-
-// .x.axis path {
-//   display: none;
-// }
-
-// .tooltip {
-//   position: absolute;
-//   padding: 10px;
-//   font: 12px sans-serif;
-//   background: #222;
-//   color: #fff;
-//   border: 0px;
-//   border-radius: 8px;
-//   pointer-events: none;
-//   opacity: 0.9;
-//   visibility: hidden;
-// }
+            tooltip.style("visibility", "hidden");
+         })
+         .on('click', function(d) {
+            chart.selectAll('.' + d.Class)
+                 .classed('click-active', function(d) {
+                    // toggle state
+                    return !d3.select(this).classed('click-active');
+                 });
+         })
 }
 
 //=================================================

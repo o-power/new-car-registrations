@@ -17,3 +17,51 @@
   fill: #C0C0C0;
   stroke: #C0C0C0;
 }
+
+.tooltip {
+  position: absolute;
+  padding: 10px;
+  font: 12px sans-serif;
+  background: #222;
+  color: #fff;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0.9;
+  visibility: hidden;
+}
+
+.click-active, .active {
+  opacity: 1.0;
+  stroke-opacity: 1.0;
+  z-index: 1000;
+  /*r: 8;*/
+}
+
+path.click-active {
+  stroke-width: 3.0;
+}
+
+path.active {
+  stroke-width: 3.0;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+
+
+
+
