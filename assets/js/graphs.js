@@ -42,7 +42,8 @@ function makeGraphs2(dataset) {
     dataset.forEach(function(d) {
         // convert Units from string to integer
         d.Units = parseInt(d.Units);
-        //d.Year = new Date(d.Year);
+        d.Rank = parseInt(d.Rank);
+        d.Year = parseInt(d.Year);
     });
     
     mybumpchart(dataset);
@@ -58,7 +59,195 @@ function makeGraphs2(dataset) {
 // Bump Chart
 //=================================================
 function mybumpchart(dataset) {
-    console.log("Hello!");
+    // http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a
+    const margin = { top: 35, right: 0, bottom: 30, left: 70 };
+    const width = 960 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
+    
+    // sort data
+    dataset.sort(function(a, b) {
+         return parseInt(b.Year) - parseInt(a.Year);
+    });
+    
+    const chart = d3.select("#mybumpchart")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform",`translate(${margin.left},${margin.top})`);
+     
+    const x = d3.scaleBand()
+                .domain(dataset.map(function(d) { return d.Year; }).reverse())
+                .rangeRound([25, width - 15]);
+
+    const y = d3.scaleLinear()
+                .domain([d3.min(dataset, function(d) { return d.Rank }), d3.max(dataset, function(d) { return d.Rank; })])
+                .range([20, height - 30]);
+
+    const size = d3.scaleLinear()
+                   .domain(d3.extent(dataset, function(d) { return d.Units; }))
+                   .range([3, 10]);
+    
+    const xAxis = d3.axisBottom(x);
+
+    const yAxis = d3.axisLeft(y);
+
+    chart.append("g")
+         .attr("class", "x axis")
+         .attr("transform", "translate(-"+ x.bandwidth()/2.0 +"," + height + ")")
+         .call(xAxis);
+
+    chart.append("g")
+         .attr("class", "y axis")
+         .call(yAxis);
+         
+    chart.append("text")
+         .text("Popularity ranking of car colours")
+         .attr("text-anchor", "middle")
+         .attr("class", "graph-title")
+         .attr("y", -10)
+         .attr("x", width / 2.0);
+
+    chart.append("text")
+         .text("Rank")
+         .attr("text-anchor", "middle")
+         .attr("class", "graph-title")
+         .attr("y", -35)
+         .attr("x", width / -4.0)
+         .attr("transform", "rotate(-90)");
+    
+    const colours = d3.map(dataset, function(d) { return d.Colour; }).keys();
+    
+    // array of the colours
+    //console.log(colours);
+    
+    colours.forEach(function(colour) {
+        const currData = dataset.filter(function(d) { if(d.Colour == colour) { return d; } }); 
+        
+        // array with all the rows for a particular colour
+        //console.log(currData);
+        
+        const line = d3.line()
+                       .x(function(d) { return x(d.Year); })
+                       .y(function(d) { return y(d.Rank); });
+                       
+        chart.append("path")
+            .datum(currData)
+            .attr("class", colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-') )
+            .attr("style", "fill:none !important")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 2)
+            .attr("stroke-opacity", 0.1)
+            .attr("d", line);
+        
+    }); // for each colour
+    
+    var node = chart.append("g")
+                    .selectAll("circle")
+                    .data(dataset)
+                    .enter()
+                    .append("circle")
+                    .attr("class", "point")
+                    .attr("cx", function(d) { return x(d.Year); })
+                    .attr("cy", function(d) { return y(d.Rank); })
+                    .attr('fill', 'blue')
+                    // replace spaces with - and remove '.' (from d.c. united)
+                    .attr("class", function(d) { return d.Colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-') })
+                    .attr("r", 6)
+                    //.attr("r", function(d) { return size(d['goals_for']) })
+                    .attr("stroke-width", 1.5)
+                    .attr('opacity', '0.6');
+                    
+                    
+//           ///////////////////////
+//   // Tooltips
+//   var tooltip = d3.select("body").append("div")
+//       .attr("class", "tooltip");
+
+//   chart.selectAll("circle")
+//       .on("mouseover", function(d) {
+//         chart.selectAll('.' + d['class'])
+//             .classed('active', true);
+
+//         var tooltip_str = "Club: " + d['club'] +
+//                 "<br/>" + "Year: " + d['year'] +
+//                 "<br/>" + "Points: " + d['points'] +
+//                 "<br/>" + "W/L/T: " + d['wins'] + " / " + d['losses'] + " / " + d['ties'] +
+//                 "<br/>" + "Goals F/A: " + d['goals_for'] + " / " + d['goals_against'];
+
+//         if(d['alias'] != '') {
+//           tooltip_str += "<br/>(aka: " + d['alias'] + ")";
+//         }
+
+//         tooltip.html(tooltip_str)
+//             .style("visibility", "visible");
+//       })
+//       .on("mousemove", function(d) {
+//         tooltip.style("top", event.pageY - (tooltip.node().clientHeight + 5) + "px")
+//             .style("left", event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+//       })
+//       .on("mouseout", function(d) {
+//         chart.selectAll('.'+d['class'])
+//             .classed('active', false);
+
+//         tooltip.style("visibility", "hidden");
+//       })
+//       .on('click', function(d) {
+//         chart.selectAll('.' + d['class'])
+//             .classed('click-active', function(d) {
+//               // toggle state
+//               return !d3.select(this).classed('click-active');
+//             });
+//       })
+
+// });
+// </script>
+
+// <style>
+
+// .click-active, .active {
+//   opacity: 1.0;
+//   stroke-opacity: 1.0;
+//   z-index: 1000;
+//   /*r: 8;*/
+// }
+
+// path.click-active {
+//   stroke-width: 3.0;
+// }
+
+// path.active {
+//   stroke-width: 3.0;
+// }
+
+// .axis text {
+//   font: 10px sans-serif;
+// }
+
+// .axis path,
+// .axis line {
+//   fill: none;
+//   stroke: #000;
+//   shape-rendering: crispEdges;
+// }
+
+// .x.axis path {
+//   display: none;
+// }
+
+// .tooltip {
+//   position: absolute;
+//   padding: 10px;
+//   font: 12px sans-serif;
+//   background: #222;
+//   color: #fff;
+//   border: 0px;
+//   border-radius: 8px;
+//   pointer-events: none;
+//   opacity: 0.9;
+//   visibility: hidden;
+// }
 }
 
 //=================================================
