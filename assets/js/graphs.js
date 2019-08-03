@@ -1,6 +1,18 @@
-d3.csv("assets/data/UnitsByMakeAndYear.csv").then(function(dataset) {
-    makeGraphs(dataset);
-});
+//d3.csv("assets/data/UnitsByMakeAndYear.csv").then(function(dataset) {
+//    makeGraphs(dataset);
+//});
+
+Promise.all([
+    d3.csv("assets/data/UnitsByMakeAndYear.csv"),
+    d3.csv("assets/data/UnitsByColourAndYear.csv")
+]).then(function(files) {
+    makeGraphs(files[0]);
+    makeGraphs2(files[1]);
+    // files[0] will contain file1.csv
+    // files[1] will contain file2.csv
+}).catch(function(err) {
+    // handle error here
+})
 
 // note 2019 is year to date (29th July 2019)
 
@@ -17,14 +29,41 @@ function makeGraphs(dataset) {
     mystackedareaplot(dataset);
     //mytreemap(data);
     
-    console.log(dataset[0]);
-    console.log(dataset[0].Rank);
-    console.log(dataset[0].Make);
-    console.log(dataset[0].Units);
-    console.log(dataset[0].Year);
-    console.log(dataset.length);
+    //console.log(dataset[0]);
+    //console.log(dataset[0].Rank);
+    //console.log(dataset[0].Make);
+    //console.log(dataset[0].Units);
+    //console.log(dataset[0].Year);
+    //console.log(dataset.length);
 }
 
+function makeGraphs2(dataset) {
+    
+    dataset.forEach(function(d) {
+        // convert Units from string to integer
+        d.Units = parseInt(d.Units);
+        //d.Year = new Date(d.Year);
+    });
+    
+    mybumpchart(dataset);
+    
+    console.log(dataset[0]);
+    console.log(dataset[0].Rank);
+    console.log(dataset[0].Colour);
+    console.log(dataset[0].Units);
+    console.log(dataset[0].Year);
+}
+
+//=================================================
+// Bump Chart
+//=================================================
+function mybumpchart(dataset) {
+    console.log("Hello!");
+}
+
+//=================================================
+// Bar Plot
+//=================================================
 function mybarplot(dataset) {
     
     // References:
@@ -94,6 +133,9 @@ function mybarplot(dataset) {
 
 }
 
+//=================================================
+// Stacked Area Plot
+//=================================================
 function mystackedareaplot(dataset) {
     // https://www.d3-graph-gallery.com/graph/stackedarea_basic.html
     // https://medium.com/@louisemoxy/how-to-create-a-stacked-area-chart-with-d3-28a2fee0b8ca
