@@ -295,11 +295,46 @@ function mybarplot(dataset) {
        .attr("fill", "#69b3a2");
     
     // add gridlines https://blog.risingstack.com/d3-js-tutorial-bar-charts-with-javascript/
-    // add labels
+    // svg.append('g')
+    //   .attr('class', 'grid')
+    //   .attr('transform', `translate(0, ${height})`)
+    //   .call(d3.axisBottom()
+    //   .scale(xScale)
+    //   .tickSize(-height, 0, 0)
+    //   .tickFormat(''))
+    
+    svg.append('g')
+       .attr('class', 'grid')
+       .call(d3.axisLeft()
+       .scale(yScale)
+       .tickSize(-width, 0, 0)
+       .tickFormat(''));
+       
+    // add y label
+    svg.append('text')
+       .attr('x', -height/2)
+       .attr('y', -margin.left/2)
+       .attr('transform', 'rotate(-90)')
+       .attr('text-anchor', 'middle')
+       .text('Units');
+    
+    // add title
+    svg.append('text')
+       .attr('x', width / 2 + margin.left)
+       .attr('y', margin.top/2)
+       .attr('text-anchor', 'middle')
+       .text('Car makes by units (2019)');
+    
     // add interactivity
+    // svg..on('mouseenter', function (actual, i) {
+    //     d3.select(this).attr(‘opacity’, 0.5)
+    // })
+    // .on('mouseleave’, function (actual, i) {
+    //     d3.select(this).attr(‘opacity’, 1)
+    // })
+    
     // add colors and fonts
     // https://blog.risingstack.com/tutorial-d3-js-calendar-heatmap/
-
 }
 
 //=================================================
