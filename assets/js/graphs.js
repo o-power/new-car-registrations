@@ -212,6 +212,7 @@ function mybumpchart(dataset) {
                    .style("visibility", "visible");
          })
          .on("mousemove", function(d) {
+             // or use d3.mouse to get x and y coordinates?
             tooltip.style("top", event.pageY - (tooltip.node().clientHeight + 5) + "px")
                    .style("left", event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
          })
@@ -326,15 +327,20 @@ function mybarplot(dataset) {
        .text('Car makes by units (2019)');
     
     // add interactivity
-    // svg..on('mouseenter', function (actual, i) {
-    //     d3.select(this).attr(‘opacity’, 0.5)
-    // })
-    // .on('mouseleave’, function (actual, i) {
-    //     d3.select(this).attr(‘opacity’, 1)
-    // })
+    svg.selectAll("rect")
+       .on('mouseenter', function (actual, i) {
+           console.log(this);
+           d3.select(this).attr('opacity', 0.5);
+       })
+       .on('mouseleave', function (actual, i) {
+           d3.select(this).attr('opacity', 1);
+       });
     
     // add colors and fonts
+    
+    
     // https://blog.risingstack.com/tutorial-d3-js-calendar-heatmap/
+    // https://jsfiddle.net/matehu/w7h81xz2/
 }
 
 //=================================================
