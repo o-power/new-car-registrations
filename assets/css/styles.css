@@ -1,64 +1,80 @@
 /* colours for bump chart */
 .grey {
-  fill: #808080;
-  stroke: #808080;
+    fill: #808080;
+    stroke: #808080;
 }
 
 .black {
-  fill: #000000;
-  stroke: #000000;
+    fill: #000000;
+    stroke: #000000;
 }
 
 .white-ivory {
-  fill: #FFFFFF;
-  stroke: #808080;
+    fill: #FFFFFF;
+    stroke: #808080;
 }
 
 .silver-aluminium {
-  fill: #C0C0C0;
-  stroke: #C0C0C0;
+    fill: #C0C0C0;
+    stroke: #C0C0C0;
+}
+
+.bronze {
+    fill: #CD7F32;
+    stroke: #CD7F32;
+}
+
+.beige {
+    fill: #C3B091;
+    stroke: #C3B091;
+}
+
+.blue {
+    fill: #0000FF;
+    stroke: #0000FF;
 }
 
 /* interactivity for bump chart */
 .tooltip {
-  position: absolute;
-  padding: 10px;
-  font: 12px sans-serif;
-  background: #222;
-  color: #fff;
-  border: 0px;
-  border-radius: 8px;
-  pointer-events: none;
-  opacity: 0.9;
-  visibility: hidden;
+    position: absolute;
+    padding: 10px;
+    font: 12px sans-serif;
+    background: #222;
+    color: #fff;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    opacity: 0.9;
+    visibility: hidden;
 }
 
-.click-active, .active {
-  opacity: 1.0;
-  stroke-opacity: 1.0;
-  z-index: 1000;
-  /*r: 8;*/
+.click-active,
+.active {
+    opacity: 1.0;
+    stroke-opacity: 1.0;
+    z-index: 1000;
+    /*r: 8;*/
 }
 
 path.click-active {
-  stroke-width: 3.0;
+    stroke-width: 3.0;
 }
 
 path.active {
-  stroke-width: 3.0;
+    stroke-width: 3.0;
 }
 
 .axis text {
-  font: 10px sans-serif;
+    font: 10px sans-serif;
 }
 
 .axis path,
 .axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
 }
 
 .x.axis path {
-  display: none;
+    display: none;
 }
