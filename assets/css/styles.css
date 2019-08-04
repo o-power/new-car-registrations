@@ -74,6 +74,16 @@
     stroke: #000000;
 }
 
+.pink {
+    fill: #FF69B4;
+    stroke: #FF69B4;
+}
+
+/*.multi-coloured {*/
+/*    fill: ;*/
+/*    stroke: ;*/
+/*}*/
+
 /* interactivity for bump chart */
 .tooltip {
     position: absolute;

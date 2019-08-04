@@ -46,7 +46,7 @@ function makeGraphs2(dataset) {
         d.Year = parseInt(d.Year);
     });
     
-    mybumpchart(dataset.filter(function (d) { return d.Rank < 11; }));
+    mybumpchart(dataset.filter(function (d) { return (d.Year > 2009); }));
     
     console.log(dataset[0]);
     console.log(dataset[0].Rank);

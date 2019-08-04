@@ -5,75 +5,28 @@ White/Ivory,11900,2019,3
 Blue,11601,2019,4
 Red/Maroon,9563,2019,5
 Brown,1364,2019,6
-Green,509,2019,7
-Orange,506,2019,8
-Yellow,181,2019,9
-White/Ivory and Black,179,2019,10
-Red/Maroon and Black,170,2019,11
-Grey and Black,130,2019,12
-Blue and Black,104,2019,13
-Red/Maroon and Grey,42,2019,14
-White/Ivory and Grey,40,2019,15
-Orange and Black,34,2019,16
-Purple,31,2019,17
-Black and White/Ivory,27,2019,18
-Blue and White/Ivory,26,2019,19
-Black and Greys,21,2019,20
-Yellow and Black,20,2019,21
-Blue and Grey,15,2019,22
-Silver/Aluminium,10,2019,23
-White/Ivory and Red/Maroon,7,2019,24
-Green and Black,4,2019,25
-Grey and White/Ivory,2,2019,26
-Purple and Black,2,2019,27
-Beige,1,2019,28
-Black and Red/Maroon,1,2019,29
-Bronze,1,2019,30
-Brown and Black,1,2019,31
-Brown and White,1,2019,32
-Grey / Orange,1,2019,33
-Orange and Grey,1,2019,34
-Red/Maroon and White/Ivory,1,2019,35
-White and Orange,1,2019,36
-Purple / Grey,0,2019,37
-Red/Maroon and Red/Maroon,0,2019,38
-Yellow and Grey,0,2019,39
+Multi-coloured,830,2019,7
+Green,509,2019,8
+Orange,506,2019,9
+Yellow,181,2019,10
+Purple,31,2019,11
+Silver/Aluminium,10,2019,12
+Beige,1,2019,13
+Bronze,1,2019,14
 Grey,47779,2018,1
 Black,23077,2018,2
 White/Ivory,18628,2018,3
 Blue,16267,2018,4
 Red/Maroon,14677,2018,5
 Brown,2527,2018,6
-Orange,598,2018,7
-Green,508,2018,8
-Yellow,346,2018,9
-White/Ivory and Black,287,2018,10
-Red/Maroon and Black,231,2018,11
-Grey and Black,135,2018,12
-Blue and Black,124,2018,13
-Purple,102,2018,14
-Orange and Black,63,2018,15
-White/Ivory and Grey,50,2018,16
-Red/Maroon and Grey,46,2018,17
-Yellow and Black,34,2018,18
-Blue and Grey,31,2018,19
-Black and Greys,30,2018,20
-Black and White/Ivory,26,2018,21
-Silver/Aluminium,23,2018,22
-Purple / Grey,14,2018,23
-Grey / Orange,12,2018,24
-Blue and White/Ivory,11,2018,25
-Brown and Black,5,2018,26
-Orange and Grey,5,2018,27
-Purple and Black,5,2018,28
-Red/Maroon and White/Ivory,4,2018,29
-Green and Black,3,2018,30
-Grey and White/Ivory,2,2018,31
-,1,2018,32
-Beige,1,2018,33
-Red/Maroon and Red/Maroon,1,2018,34
-Yellow and Grey,1,2018,35
-Gold,0,2018,36
+Multi-coloured,1120,2018,7
+Orange,598,2018,8
+Green,508,2018,9
+Yellow,346,2018,10
+Purple,102,2018,11
+Silver/Aluminium,23,2018,12
+Beige,1,2018,13
+Gold,0,2018,14
 Grey,49348,2017,1
 Black,25021,2017,2
 White/Ivory,19567,2017,3
@@ -82,31 +35,13 @@ Red/Maroon,14911,2017,5
 Brown,3436,2017,6
 Yellow,1013,2017,7
 Green,807,2017,8
-Purple,202,2017,9
-Orange,189,2017,10
-White/Ivory and Black,177,2017,11
-Red/Maroon and Black,121,2017,12
-Blue and Black,51,2017,13
-Grey and Black,41,2017,14
-Black and Greys,25,2017,15
-Orange and Black,25,2017,16
-Blue and Grey,22,2017,17
-Silver/Aluminium,22,2017,18
-White/Ivory and Grey,10,2017,19
-Red/Maroon and Grey,6,2017,20
-Blue and White/Ivory,5,2017,21
-Yellow and Black,4,2017,22
-Brown and Black,3,2017,23
-Green and Black,3,2017,24
-Purple / Grey,3,2017,25
-Beige,2,2017,26
-Black and White/Ivory,2,2017,27
-Gold,2,2017,28
-Grey / Orange,1,2017,29
-Grey and White/Ivory,1,2017,30
-Black and Yellow,0,2017,31
-Bronze,0,2017,32
-Multi-coloured,0,2017,33
+Multi-coloured,500,2017,9
+Purple,202,2017,10
+Orange,189,2017,11
+Silver/Aluminium,22,2017,12
+Beige,2,2017,13
+Gold,2,2017,14
+Bronze,0,2017,15
 Grey,30727,2016,1
 Black,28259,2016,2
 Silver/Aluminium,22918,2016,3
@@ -119,19 +54,10 @@ Beige,1260,2016,9
 Green,919,2016,10
 Gold,558,2016,11
 Orange,312,2016,12
-Yellow,177,2016,13
-White/Ivory and Black,82,2016,14
-Red/Maroon and Black,70,2016,15
-Purple,65,2016,16
-Blue and Black,28,2016,17
-Orange and Black,21,2016,18
-Grey and Black,6,2016,19
-Black and Greys,2,2016,20
-Black and Yellow,1,2016,21
-Blue and Grey,1,2016,22
-Multi-coloured,1,2016,23
-Yellow and Black,1,2016,24
-Pink,0,2016,25
+Multi-coloured,213,2016,13
+Yellow,177,2016,14
+Purple,65,2016,15
+Pink,0,2016,16
 Black,24725,2015,1
 Silver/Aluminium,24474,2015,2
 Grey,21787,2015,3
@@ -161,7 +87,7 @@ Gold,496,2014,11
 Orange,338,2014,12
 Yellow,275,2014,13
 Purple,141,2014,14
-White/Ivory and Black,0,2014,15
+Multi-coloured,0,2014,15
 Silver/Aluminium,16949,2013,1
 Black,16944,2013,2
 Grey,12902,2013,3
@@ -176,13 +102,8 @@ Green,269,2013,11
 Purple,166,2013,12
 Orange,132,2013,13
 Yellow,102,2013,14
-White/Ivory and Black,1,2013,15
-Black and Greys,0,2013,16
-Blue and Grey,0,2013,17
-Grey and Black,0,2013,18
-Pink,0,2013,19
-Red and Purple,0,2013,20
-Silver and Grey,0,2013,21
+Multi-coloured,1,2013,15
+Pink,0,2013,16
 Silver/Aluminium,18588,2012,1
 Black,18364,2012,2
 Grey,15471,2012,3
@@ -197,15 +118,8 @@ Bronze,357,2012,11
 Purple,326,2012,12
 Yellow,100,2012,13
 Orange,63,2012,14
-Pink,2,2012,15
-Black and Greys,1,2012,16
-Blue and Grey,1,2012,17
-Grey and Black,1,2012,18
-Red and Purple,1,2012,19
-Silver and Grey,1,2012,20
-Multi-coloured,0,2012,21
-Red/Maroon and Black,0,2012,22
-White/Ivory and Black,0,2012,23
+Multi-coloured,5,2012,15
+Pink,2,2012,16
 Silver/Aluminium,22318,2011,1
 Black,21697,2011,2
 Grey,16343,2011,3
@@ -221,98 +135,4 @@ Bronze,233,2011,12
 Yellow,98,2011,13
 Orange,90,2011,14
 Pink,22,2011,15
-,17,2011,16
-White/Ivory and Black,12,2011,17
-Red/Maroon and Black,5,2011,18
-Multi-coloured,1,2011,19
-Black and Silver/Aluminium,0,2011,20
-Black and White/Ivory,0,2011,21
-Grey and Red,0,2011,22
-Red and Pink,0,2011,23
-Red/Maroon and White/Ivory,0,2011,24
-Silver and Grey,0,2011,25
-Silver/Aluminium,21534,2010,1
-Black,21477,2010,2
-Grey,15283,2010,3
-Blue,11213,2010,4
-Red/Maroon,9322,2010,5
-Gold,4279,2010,6
-White/Ivory,1839,2010,7
-Beige,1072,2010,8
-Brown,1029,2010,9
-Green,627,2010,10
-Yellow,261,2010,11
-Purple,229,2010,12
-Bronze,143,2010,13
-Orange,118,2010,14
-Pink,13,2010,15
-Black and Silver/Aluminium,1,2010,16
-Black and White/Ivory,1,2010,17
-Grey and Red,1,2010,18
-Red and Pink,1,2010,19
-Red/Maroon and Black,1,2010,20
-Red/Maroon and White/Ivory,1,2010,21
-Silver and Grey,1,2010,22
-Blue and Grey,0,2010,23
-Blue and White/Ivory,0,2010,24
-Grey and Yellow,0,2010,25
-White and Gold,0,2010,26
-Silver/Aluminium,13125,2009,1
-Black,12603,2009,2
-Grey,8145,2009,3
-,7290,2009,4
-Blue,7282,2009,5
-Red/Maroon,4748,2009,6
-Gold,1200,2009,7
-White/Ivory,913,2009,8
-Beige,618,2009,9
-Green,527,2009,10
-Brown,483,2009,11
-Yellow,173,2009,12
-Purple,141,2009,13
-Bronze,139,2009,14
-Orange,53,2009,15
-Pink,19,2009,16
-Black and Silver/Aluminium,1,2009,17
-Black and White/Ivory,1,2009,18
-Blue and Grey,1,2009,19
-Blue and White/Ivory,1,2009,20
-Grey and Yellow,1,2009,21
-Red/Maroon and White/Ivory,1,2009,22
-White and Gold,1,2009,23
-Green and Black,0,2009,24
-Green and White/Ivory,0,2009,25
-Silver/Aluminium and Blue,0,2009,26
-White/Ivory and Grey,0,2009,27
-Yellow and Black,0,2009,28
-Black,39929,2008,1
-Silver/Aluminium,37762,2008,2
-Grey,22822,2008,3
-Blue,22481,2008,4
-Red/Maroon,14171,2008,5
-,3666,2008,6
-Beige,2365,2008,7
-White/Ivory,1884,2008,8
-Gold,1753,2008,9
-Green,1529,2008,10
-Brown,1155,2008,11
-Bronze,901,2008,12
-Yellow,892,2008,13
-Purple,161,2008,14
-Orange,128,2008,15
-Pink,4,2008,16
-Black and Silver/Aluminium,1,2008,17
-Green and Black,1,2008,18
-Green and White/Ivory,1,2008,19
-Silver/Aluminium and Blue,1,2008,20
-White/Ivory and Grey,1,2008,21
-Yellow and Black,1,2008,22
-Black and Greys,0,2008,23
-Black and White/Ivory,0,2008,24
-Blue and Silver,0,2008,25
-Gold / Beige,0,2008,26
-Green and Yellow,0,2008,27
-Red and Silver,0,2008,28
-Silver and Grey,0,2008,29
-White/Ivory and Black,0,2008,30
-White/Ivory and Red/Maroon,0,2008,31
+Multi-coloured,18,2011,16
