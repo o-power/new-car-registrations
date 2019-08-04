@@ -34,6 +34,46 @@
     stroke: #0000FF;
 }
 
+.red-maroon {
+    fill: #FF0000;
+    stroke: #FF0000;
+}
+
+.brown {
+    fill: #A52A2A;
+    stroke: #A52A2A;
+}
+
+.yellow {
+    fill: #FFFF00;
+    stroke:	#FFFF00;
+}
+
+.green {
+    fill: #008000;
+    stroke:	#008000;
+}
+
+.purple {
+    fill: #800080;
+    stroke: #800080;
+}
+
+.gold {
+    fill: #FFD700;
+    stroke: #FFD700;
+}
+
+.orange {
+    fill: #FFA500;
+    stroke: #FFA500;
+}
+
+.white-ivory-and-black {
+    fill: #FFFFFF;
+    stroke: #000000;
+}
+
 /* interactivity for bump chart */
 .tooltip {
     position: absolute;
