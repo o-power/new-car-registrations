@@ -46,7 +46,7 @@ function makeGraphs2(dataset) {
         d.Year = parseInt(d.Year);
     });
     
-    mybumpchart(dataset);
+    mybumpchart(dataset.filter(function (d) { return d.Rank < 11; }));
     
     console.log(dataset[0]);
     console.log(dataset[0].Rank);
@@ -172,7 +172,7 @@ function mybumpchart(dataset) {
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 2)
-            .attr("stroke-opacity", 0.1)
+            .attr("stroke-opacity", 0.5)
             .attr("d", line);
         
     }); // for each colour
@@ -191,7 +191,7 @@ function mybumpchart(dataset) {
                     .attr("r", 6)
                     //.attr("r", function(d) { return size(d['goals_for']) })
                     .attr("stroke-width", 1.5)
-                    .attr('opacity', '0.6');
+                    .attr('opacity', '1.0');
                     
     // tooltips
     const tooltip = d3.select("body")
