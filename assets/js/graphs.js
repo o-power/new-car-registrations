@@ -150,6 +150,18 @@ function mybumpchart(dataset) {
          .attr("x", width / -4.0)
          .attr("transform", "rotate(-90)");
     
+    const defs = chart.append("defs");
+    
+    const linearGradient = defs.append("linearGradient")
+    		    .attr("id", "myGradient");
+        
+    linearGradient.html(`<stop offset="0.0%" stop-color="#FF0000"></stop>  
+        <stop offset="20%" stop-color="#0000FF"></stop>
+        <stop offset="40%" stop-color="#FFFF00"></stop>
+        <stop offset="60%" stop-color="#800080"></stop>
+        <stop offset="80%" stop-color="#FFA500"></stop> 
+        <stop offset="100%" stop-color="#000000"></stop>`);
+        
     const colours = d3.map(dataset, function(d) { return d.Colour; }).keys();
     
     // array of the colours

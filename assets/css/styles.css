@@ -79,10 +79,10 @@
     stroke: #FF69B4;
 }
 
-/*.multi-coloured {*/
-/*    fill: ;*/
-/*    stroke: ;*/
-/*}*/
+.multi-coloured {
+    fill: url("#myGradient");
+    stroke: #808080;
+}
 
 /* interactivity for bump chart */
 .tooltip {
