@@ -10,38 +10,45 @@ Promise.all([
     makeGraphs(files[0]);
     makeGraphs2(files[1]);
     makeGraphs3(files[2]);
-    // files[0] will contain file1.csv
-    // files[1] will contain file2.csv
 }).catch(function(err) {
-    // handle error here
-})
+    console.log(err);
+});
 
-// note 2019 is year to date (29th July 2019)
-
+/**
+  * makeGraphs()
+  * 
+  */
 function makeGraphs(dataset) {
     
     dataset.forEach(function(d) {
-        // convert Units from string to integer
         d.Units = parseInt(d.Units);
-        //d.Year = new Date(d.Year);
     });
 
-    //mybarplot(dataset.filter(function (d) { return d.Year.getFullYear() == 2019; }));
     mybarplot(dataset.filter(function (d) { return d.Year == "2019"; }));
     mystackedareaplot(dataset);
     
+    // {Rank: "1", Make: "TOYOTA", Units: 21724, Year: "2008"}
     //console.log(dataset[0]);
+    
+    // "1"
     //console.log(dataset[0].Rank);
+    // "TOYOTA"
     //console.log(dataset[0].Make);
+    // 21724
     //console.log(dataset[0].Units);
+    // "2008"
     //console.log(dataset[0].Year);
+    // 489
     //console.log(dataset.length);
 }
 
+/**
+  * makeGraphs2()
+  * 
+  */
 function makeGraphs2(dataset) {
     
     dataset.forEach(function(d) {
-        // convert Units from string to integer
         d.Units = parseInt(d.Units);
         d.Rank = parseInt(d.Rank);
         d.Year = parseInt(d.Year);
@@ -49,13 +56,14 @@ function makeGraphs2(dataset) {
     
     mybumpchart(dataset.filter(function (d) { return (d.Year > 2009); }));
     
-    console.log(dataset[0]);
-    console.log(dataset[0].Rank);
-    console.log(dataset[0].Colour);
-    console.log(dataset[0].Units);
-    console.log(dataset[0].Year);
+    // {Colour: "Grey", Units: 30023, Year: 2019, Rank: 1, Class: "grey"}
+    //console.log(dataset[0]);
 }
 
+/**
+  * makeGraphs3()
+  * 
+  */
 function makeGraphs3(dataset) {
     
     // UnitsByYearMakeModel
