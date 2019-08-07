@@ -55,3 +55,5 @@ To run locally, clone this repository directly into the editor of your choice by
 ### Content
 ### Media
 ### Acknowledgements
+Bump chart is modifed fromm Chas Jhin's example on Bl.ocks
+http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a

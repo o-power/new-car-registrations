@@ -66,25 +66,39 @@ function makeGraphs2(dataset) {
   */
 function makeGraphs3(dataset) {
     
+    // {children: Array(12), name: "UnitsByYearMakeModel"}
+    //console.log(dataset);
+    
     // UnitsByYearMakeModel
-    console.log(dataset.name);
-    // 2019
-    console.log(dataset.children[0].name);
-    // VOLVO
-    console.log(dataset.children[0].children[0].name);
-    // XC60
-    console.log(dataset.children[0].children[0].children[0].name);
+    //console.log(dataset.name);
+    
+    // {children: Array(35), name: "2019"}
+    //console.log(dataset.children[0]);
+    
+    // "2019"
+    //console.log(dataset.children[0].name);
+    
+    // {children: Array(11), name: "VOLVO"}
+    //console.log(dataset.children[0].children[0]);
+    
+    // "VOLVO"
+    //console.log(dataset.children[0].children[0].name);
+    
+    // {name: "XC60", value: 267}
+    //console.log(dataset.children[0].children[0].children[0]);
+    
+    // "XC60"
+    //console.log(dataset.children[0].children[0].children[0].name);
     // 267
-    console.log(dataset.children[0].children[0].children[0].value);
-    //
-    console.log(dataset.children[0].children[0]);
+    //console.log(dataset.children[0].children[0].children[0].value);
     
     mytreemap(dataset.children[0].children[0]);
 }
 
-//=================================================
-// Bump Chart
-//=================================================
+/**
+  * mybumpchart()
+  * 
+  */
 function mybumpchart(dataset) {
     // http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a
     
