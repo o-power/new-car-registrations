@@ -114,6 +114,7 @@ path.active {
     stroke-width: 3.0;
 }
 
+/* axis class is on x and y axis*/
 .axis text {
     font: 10px sans-serif;
 }
@@ -128,3 +129,6 @@ path.active {
 .x.axis path {
     display: none;
 }
+
+/* .graph-title */
+/* .point */

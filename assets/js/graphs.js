@@ -132,10 +132,6 @@ function mybumpchart(dataset) {
                 .domain([d3.min(dataset, function(d) { return d.Rank; }), d3.max(dataset, function(d) { return d.Rank; })]) // this is what is written on the axis
                 .range([20, height - 30]); // this is where the axis is placed: from 20px to 470px
 
-    const size = d3.scaleLinear()
-                   .domain(d3.extent(dataset, function(d) { return d.Units; }))
-                   .range([3, 10]);
-    
     const xAxis = d3.axisBottom(x);
 
     const yAxis = d3.axisLeft(y);
@@ -163,73 +159,102 @@ function mybumpchart(dataset) {
          .attr("text-anchor", "middle")
          .attr("class", "graph-title")
          .attr("y", -35)
-         .attr("x", width / -4.0)
+         .attr("x", height / -2.0)
          .attr("transform", "rotate(-90)");
     
+    // Linear gradient for multi-coloured category adapted from:
+    // https://bl.ocks.org/EfratVil/484d0555f6f818ca6eea3de549a21e86
     const defs = chart.append("defs");
     
     const linearGradient = defs.append("linearGradient")
-    		    .attr("id", "myGradient");
-        
-    linearGradient.html(`<stop offset="0.0%" stop-color="#FF0000"></stop>  
-        <stop offset="20%" stop-color="#0000FF"></stop>
-        <stop offset="40%" stop-color="#FFFF00"></stop>
-        <stop offset="60%" stop-color="#800080"></stop>
-        <stop offset="80%" stop-color="#FFA500"></stop> 
-        <stop offset="100%" stop-color="#000000"></stop>`);
-        
+    		                   .attr("id", "myGradient");
+    
+    linearGradient.append("stop")
+                  .attr("offset", "0%")
+                  .attr("stop-color", "#FF0000");
+                  
+    linearGradient.append("stop")
+                  .attr("offset", "20%")
+                  .attr("stop-color", "#0000FF");
+                  
+    linearGradient.append("stop")
+                  .attr("offset", "40%")
+                  .attr("stop-color", "#FFFF00");
+                  
+    linearGradient.append("stop")
+                  .attr("offset", "60%")
+                  .attr("stop-color", "#800080");
+                  
+    linearGradient.append("stop")
+                  .attr("offset", "80%")
+                  .attr("stop-color", "#FFA500");
+                  
+    linearGradient.append("stop")
+                  .attr("offset", "100%")
+                  .attr("stop-color", "#000000");
+
     const colours = d3.map(dataset, function(d) { return d.Colour; }).keys();
     
-    // array of the colours
+    // ["Silver/Aluminium", "Black", "Grey", "Blue", "Red/Maroon", "Gold", "White/Ivory", "Beige"
+    // , "Brown", "Green", "Yellow", "Purple", "Bronze", "Orange", "Pink", "Multi-coloured"]
     //console.log(colours);
     
+    // {Colour: "Silver/Aluminium", Units: 10, Year: 2019, Rank: 12, Class: "silver-aluminium"}
+    //console.log(d3.map(dataset, function(d) { return d.Colour; }).values()[0]);
+    
     colours.forEach(function(colour) {
-        const currData = dataset.filter(function(d) { if(d.Colour == colour) { return d; } }); 
+        const currData = dataset.filter(function(d) { if (d.Colour == colour) { return d; } }); 
         
-        // array with all the rows for a particular colour
-        //console.log(currData);
+        // currData is an array with all the rows for a particular colour
+        // {Colour: "Silver/Aluminium", Units: 21534, Year: 2010, Rank: 1, Class: "silver-aluminium"}
+        //console.log(currData[0]);
         
+        // D3 line generator
         const line = d3.line()
                        .x(function(d) { return x(d.Year); })
                        .y(function(d) { return y(d.Rank); });
-                       
-        chart.append("path")
-            .datum(currData)
-            .attr("class", colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-') )
-            .attr("style", "fill:none !important")
-            .attr("stroke-linejoin", "round")
-            .attr("stroke-linecap", "round")
-            .attr("stroke-width", 2)
-            .attr("stroke-opacity", 0.5)
-            .attr("d", line);
         
+        chart.append("path")
+             .datum(currData)
+             .attr("class", colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-') )
+             .attr("style", "fill:none !important")
+             .attr("stroke-linejoin", "round")
+             .attr("stroke-linecap", "round")
+             .attr("stroke-width", 2)
+             .attr("stroke-opacity", 0.5)
+             .attr("d", line);
+             
     }); // for each colour
     
+    // nodes (circles)
     const node = chart.append("g")
-                    .selectAll("circle")
-                    .data(dataset)
-                    .enter()
-                    .append("circle")
-                    .attr("class", "point")
-                    .attr("cx", function(d) { return x(d.Year); })
-                    .attr("cy", function(d) { return y(d.Rank); })
-                    .attr('fill', 'blue')
-                    // replace spaces with - and remove '.' (from d.c. united)
-                    .attr("class", function(d) { return d.Colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-') })
-                    .attr("r", 6)
-                    //.attr("r", function(d) { return size(d['goals_for']) })
-                    .attr("stroke-width", 1.5)
-                    .attr('opacity', '1.0');
+                      .selectAll("circle")
+                      .data(dataset)
+                      .enter()
+                      .append("circle")
+                      .attr("class", "point")
+                      .attr("cx", function(d) { return x(d.Year); })
+                      .attr("cy", function(d) { return y(d.Rank); })
+                      .attr('fill', 'blue')
+                      .attr("class", function(d) { return d.Class; })
+                      .attr("r", 6)
+                      .attr("stroke-width", 1.5)
+                      .attr('opacity', '1.0');
                     
     // tooltips
     const tooltip = d3.select("body")
                       .append("div")
                       .attr("class", "tooltip");
-
+    
+    // a single div element with class="tooltip"
+    //console.log(tooltip);
+    
+    // interactivity
     chart.selectAll("circle")
          .on("mouseover", function(d) {
             chart.selectAll('.' + d.Class)
-            .classed('active', true);
+                 // adds the class active to the line and circles for this colour
+                 .classed('active', true);
 
             const tooltip_str = "Colour: " + d.Colour +
                                 "<br/>" + "Year: " + d.Year +
@@ -240,9 +265,8 @@ function mybumpchart(dataset) {
                    .style("visibility", "visible");
          })
          .on("mousemove", function(d) {
-             // or use d3.mouse to get x and y coordinates?
-            tooltip.style("top", event.pageY - (tooltip.node().clientHeight + 5) + "px")
-                   .style("left", event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+            tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
+                   .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
          })
          .on("mouseout", function(d) {
             chart.selectAll('.'+d.Class)
@@ -250,11 +274,14 @@ function mybumpchart(dataset) {
 
             tooltip.style("visibility", "hidden");
          })
-         .on('click', function(d) {
+         // so user can click on multiple colours and highlight them to make it easier to compare
+         // classed("click-active") returns true if any element in the selection has the class
+         // the function in classed is evaluated for each element in the selection
+         .on("click", function(d) {
             chart.selectAll('.' + d.Class)
-                 .classed('click-active', function(d) {
+                 .classed("click-active", function(d) {
                     // toggle state
-                    return !d3.select(this).classed('click-active');
+                    return !d3.select(this).classed("click-active");
                  });
          })
 }
