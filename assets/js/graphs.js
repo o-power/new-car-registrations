@@ -111,9 +111,9 @@ function mybumpchart(dataset) {
     const width = 960 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
     
-    // Sort data in descending order
+    // Sort data in ascending order
     dataset.sort(function(a, b) {
-         return parseInt(b.Year) - parseInt(a.Year);
+         return parseInt(a.Year) - parseInt(b.Year);
     });
     
     const chart = d3.select("#mybumpchart")
@@ -122,14 +122,15 @@ function mybumpchart(dataset) {
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform",`translate(${margin.left},${margin.top})`);
-     
+    
+    // https://www.d3-graph-gallery.com/graph/custom_axis.html
     const x = d3.scaleBand()
-                .domain(dataset.map(function(d) { return d.Year; }).reverse())
-                .rangeRound([25, width - 15]);
-
+                .domain(dataset.map(function(d) { return d.Year; })) // this is what is written on the axis
+                .rangeRound([25, width - 15]); // this is where the axis is placed: from 25px to 945px
+    
     const y = d3.scaleLinear()
-                .domain([d3.min(dataset, function(d) { return d.Rank }), d3.max(dataset, function(d) { return d.Rank; })])
-                .range([20, height - 30]);
+                .domain([d3.min(dataset, function(d) { return d.Rank; }), d3.max(dataset, function(d) { return d.Rank; })]) // this is what is written on the axis
+                .range([20, height - 30]); // this is where the axis is placed: from 20px to 470px
 
     const size = d3.scaleLinear()
                    .domain(d3.extent(dataset, function(d) { return d.Units; }))
@@ -141,7 +142,9 @@ function mybumpchart(dataset) {
 
     chart.append("g")
          .attr("class", "x axis")
-         .attr("transform", "translate(-"+ x.bandwidth()/2.0 +"," + height + ")")
+         // the width of each band can be accessed using .bandwidth()
+         // this moves the axis tick to under the modes (circles)
+         .attr("transform", `translate(-${x.bandwidth()/2.0},${height})`)
          .call(xAxis);
 
     chart.append("g")
