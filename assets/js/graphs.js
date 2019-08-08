@@ -92,7 +92,7 @@ function makeGraphs3(dataset) {
     // 267
     //console.log(dataset.children[0].children[0].children[0].value);
     
-    mytreemap(dataset.children[0].children[0]);
+    mytreemap(dataset.children[0]);
 }
 
 /**
@@ -100,46 +100,18 @@ function makeGraphs3(dataset) {
   * 
   */
 function mybumpchart(dataset) {
-    // http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a
-    
-    //// For each row, calculate the "finishing" position
-    //   // first sort, year, then points, then goals_for
-    //   data.sort(function(a, b) {
-    //     if(b['year'] != a['year']) {
-    //       return b['year'] - a['year'];
-    //     }
-    //     if(b['points'] != a['points']) {
-    //       return b['points'] - a['points'];
-    //     }
-    //     if(b['goals_for'] != a['goals_for']) {
-    //       return b['goals_for'] - a['goals_for'];
-    //     }
-    //   });
-    
-    //   // Then add the position with a simple integer increment
-    //   // now that the data is "in order"
-    //   var pos = 1;
-    //   data[0].position = pos;
-    //   for(var i=1; i<data.length; i++) {
-    //     // this is a new year, so start over
-    //     if(data[i - 1].year != data[i].year) {
-    //       pos = 1;
-    //     } else {
-    //       pos++;
-    //     }
-    //     data[i].position = pos;
-    //   }
+    // Adapted from: http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a
 
-    // add a css safe class for use in hover interactions and coloring
+    // Add a CSS safe class for use in hover interactions and coloring
     dataset.forEach(function(d) {
         d.Class = d.Colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-');
-    })
+    });
     
     const margin = { top: 35, right: 0, bottom: 30, left: 70 };
     const width = 960 - margin.left - margin.right;
     const height = 500 - margin.top - margin.bottom;
     
-    // sort data
+    // Sort data in descending order
     dataset.sort(function(a, b) {
          return parseInt(b.Year) - parseInt(a.Year);
     });
@@ -284,9 +256,10 @@ function mybumpchart(dataset) {
          })
 }
 
-//=================================================
-// Bar Plot
-//=================================================
+/**
+  * mybarplot()
+  * 
+  */
 function mybarplot(dataset) {
     
     // References:
@@ -396,9 +369,10 @@ function mybarplot(dataset) {
     // https://jsfiddle.net/matehu/w7h81xz2/
 }
 
-//=================================================
-// Stacked Area Plot
-//=================================================
+/**
+  * mystackedareaplot()
+  * 
+  */
 function mystackedareaplot(dataset) {
     // https://www.d3-graph-gallery.com/graph/stackedarea_basic.html
     // https://medium.com/@louisemoxy/how-to-create-a-stacked-area-chart-with-d3-28a2fee0b8ca
@@ -476,6 +450,10 @@ function mystackedareaplot(dataset) {
 
 }
 
+/**
+  * mytreemap()
+  * 
+  */
 function mytreemap(dataset) {
     // https://www.d3-graph-gallery.com/graph/treemap_custom.html
     // http://bl.ocks.org/JacquesJahnichen/42afd0cde7cbf72ecb81
@@ -516,8 +494,8 @@ function mytreemap(dataset) {
     // prepare a color scale
     // One color per group, opacity proportional to value: classic use of scale
     const color = d3.scaleOrdinal()
-                    .domain(["VOLVO"])
-                    .range([ "#402D54"]);
+                    .domain(["VOLVO","VOLKSWAGEN","OTHER","NISSAN"])
+                    .range([ "#402D54","#0000FF","#FF6600","#00FF00"]);
 
     // And a opacity scale
     const opacity = d3.scaleLinear()
