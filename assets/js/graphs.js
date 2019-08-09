@@ -129,13 +129,18 @@ function mybumpchart(dataset) {
                 .rangeRound([25, width - 15]); // this is where the axis is placed: from 25px to 945px
     
     const y = d3.scaleLinear()
-                .domain([d3.min(dataset, function(d) { return d.Rank; }), d3.max(dataset, function(d) { return d.Rank; })]) // this is what is written on the axis
+                .domain([d3.min(dataset, function(d) { return d.Rank; })
+                        ,d3.max(dataset, function(d) { return d.Rank; })]) // this is what is written on the axis
                 .range([20, height - 30]); // this is where the axis is placed: from 20px to 470px
 
     const xAxis = d3.axisBottom(x);
 
-    const yAxis = d3.axisLeft(y);
-
+    const yAxis = d3.axisLeft(y)
+                    // http://using-d3js.com/04_03_axis.html
+                    .tickValues(d3.range(1
+                                        ,d3.max(dataset, function(d) { return d.Rank; })+1
+                                        ,1));
+    
     chart.append("g")
          .attr("class", "x axis")
          // the width of each band can be accessed using .bandwidth()
@@ -221,7 +226,7 @@ function mybumpchart(dataset) {
              .attr("stroke-linejoin", "round")
              .attr("stroke-linecap", "round")
              .attr("stroke-width", 2)
-             .attr("stroke-opacity", 0.5)
+             .attr("stroke-opacity", 0.3)
              .attr("d", line);
              
     }); // for each colour
@@ -232,14 +237,13 @@ function mybumpchart(dataset) {
                       .data(dataset)
                       .enter()
                       .append("circle")
-                      .attr("class", "point")
                       .attr("cx", function(d) { return x(d.Year); })
                       .attr("cy", function(d) { return y(d.Rank); })
-                      .attr('fill', 'blue')
+                      .attr("fill", "blue")
                       .attr("class", function(d) { return d.Class; })
                       .attr("r", 6)
                       .attr("stroke-width", 1.5)
-                      .attr('opacity', '1.0');
+                      .attr("opacity", 0.8);
                     
     // tooltips
     const tooltip = d3.select("body")

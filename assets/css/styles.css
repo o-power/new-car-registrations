@@ -1,4 +1,8 @@
-/* colours for bump chart */
+/* ==========================================================================
+    Bump chart
+========================================================================== */
+
+/* class for each car colour */
 .grey {
     fill: #808080;
     stroke: #808080;
@@ -69,11 +73,6 @@
     stroke: #FFA500;
 }
 
-.white-ivory-and-black {
-    fill: #FFFFFF;
-    stroke: #000000;
-}
-
 .pink {
     fill: #FF69B4;
     stroke: #FF69B4;
@@ -84,7 +83,7 @@
     stroke: #808080;
 }
 
-/* interactivity for bump chart */
+/* tooltip for bump chart */
 .tooltip {
     position: absolute;
     padding: 10px;
@@ -98,12 +97,12 @@
     visibility: hidden;
 }
 
+/* formatting for when user hovers over or clicks on a car colour */
 .click-active,
 .active {
     opacity: 1.0;
     stroke-opacity: 1.0;
     z-index: 1000;
-    /*r: 8;*/
 }
 
 path.click-active {
@@ -114,11 +113,12 @@ path.active {
     stroke-width: 3.0;
 }
 
-/* axis class is on x and y axis*/
+/* format the numbers on the x and y axis */
 .axis text {
     font: 10px sans-serif;
 }
 
+/* format the axis itself and the ticks */
 .axis path,
 .axis line {
     fill: none;
@@ -126,6 +126,7 @@ path.active {
     shape-rendering: crispEdges;
 }
 
+/* remove the x axis */
 .x.axis path {
     display: none;
 }
