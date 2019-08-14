@@ -64,12 +64,15 @@ function newVsOldStackedAreaChart(dataset) {
     // {Year: "2008", Units: 60091, Type: "Used imports"}
     //console.log(sumStat[0].values[1]);
     
+    const mygroups = ["New cars", "Used Imports"];
+    const mygroup = [0, 1];
+    
     // returns an array (see below)
     const stackedData = d3.stack()
-                    .keys([0, 1]) // there is just two categories
-                    .value(function(d, key) { 
+                          .keys(mygroup)
+                          .value(function(d, key) { 
                                return d.values[key].Units;
-                    })(sumStat);
+                          })(sumStat);
     
     // [0, 151609, data: {key: "2008", values: Array(2)}]
     //console.log(stackedData[0][0]);
@@ -85,12 +88,14 @@ function newVsOldStackedAreaChart(dataset) {
                 .range([0, width]);
     
     // 0
-    //console.log(x("2008"));
+    //console.log(x(2008));
     // 370
-    //console.log(x("2018"));
+    //console.log(x(2018));
     
     // x-axis
-    const xAxis = d3.axisBottom(x);
+    const xAxis = d3.axisBottom(x)
+                    // don't want commas displaying in years
+                    .tickFormat(d3.format("d"));;
     
     svg.append("g")
        .attr("transform", "translate(0," + height + ")")
@@ -113,9 +118,18 @@ function newVsOldStackedAreaChart(dataset) {
        .call(yAxis);
     
     // colours
-    //const mygroups = ["New cars", "Used Imports"];
+    const color = d3.scaleOrdinal()
+                    .domain(mygroups)
+                    .range(["#377eb8","#e41a1c"])
     
-    //const 
+    // 0
+    //console.log(stackedData[0].key)
+    // 2008
+    //console.log(stackedData[0][0].data.key);
+    // 0
+    //console.log(stackedData[0][0][0]);
+    // 151609
+    //console.log(stackedData[0][0][1]);
     
     // create the chart    
     svg.append("g")
@@ -123,7 +137,7 @@ function newVsOldStackedAreaChart(dataset) {
        .data(stackedData)
        .enter()
        .append("path")
-       //.style("fill", function(d) { return color(mygroups[d.key-1]); })
+       .style("fill", function(d) { return color(mygroups[d.key]); })
        .attr("d",
             d3.area()
               .x(function(d, i) { return x(d.data.key); })
