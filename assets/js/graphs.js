@@ -3,13 +3,15 @@
 //});
 
 Promise.all([
-    d3.csv("assets/data/UnitsByMakeAndYear.csv"),
-    d3.csv("assets/data/UnitsByColourAndYear.csv"),
-    d3.json("assets/data/UnitsByMakeModelAndYear.json")
+    d3.csv("assets/data/UnitsByYear.csv")
+    //d3.csv("assets/data/UnitsByMakeAndYear.csv"),
+    //d3.csv("assets/data/UnitsByColourAndYear.csv"),
+    //d3.json("assets/data/UnitsByMakeModelAndYear.json")
 ]).then(function(files) {
     makeGraphs(files[0]);
-    makeGraphs2(files[1]);
-    makeGraphs3(files[2]);
+    //makeGraphs11(files[1]);
+    //makeGraphs2(files[2]);
+    //makeGraphs3(files[3]);
 }).catch(function(err) {
     console.log(err);
 });
@@ -19,6 +21,99 @@ Promise.all([
   * 
   */
 function makeGraphs(dataset) {
+    
+    dataset.forEach(function(d) {
+        d.Units = parseInt(d.Units);
+    });
+    
+    newVsOldStackedAreaChart(dataset);
+}
+
+/**
+  * newVsOldStackedAreaChart()
+  * 
+  */
+function newVsOldStackedAreaChart(dataset) {
+    // https://www.d3-graph-gallery.com/graph/stackedarea_basic.html
+    
+    const margin = {top: 30, right: 30, bottom: 70, left: 60};
+    const width = 460 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    const svg = d3.select("#new-vs-old-stacked-area-chart")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform",`translate(${margin.left},${margin.top})`);
+    
+    // sort data
+    dataset.sort(function(a, b) {
+         return parseInt(a.Year) - parseInt(b.Year);
+    });
+    
+    // group the data: one array for each value of the X axis.
+    const sumstat = d3.nest()
+                      .key(function(d) { return d.Year; })
+                      .entries(dataset);
+
+    console.log(sumstat[0]);
+    
+    // const mygroups = ["VOLKSWAGEN", "TOYOTA", "HYUNDAI"] // list of group names
+    
+    // const mygroup = [1,2,3] // list of group names
+  
+    // const stackedData = d3.stack()
+    //                       .keys(mygroup)
+    //                       .value(function(d, key){ 
+    //                                 return d.values[key].Units
+    //                             })(sumstat);
+
+    // //console.log(stackedData);
+    
+    // // x-axis
+    // const x = d3.scaleLinear()
+    //             .domain(d3.extent(dataset, function(d) { return d.Year; }))
+    //             .range([ 0, width ]);
+    
+    // svg.append("g")
+    //   .attr("transform", "translate(0," + height + ")")
+    //   .call(d3.axisBottom(x).ticks(5));
+    
+    // // y-axis
+    // const y = d3.scaleLinear()
+    //             //.domain([0, d3.max(dataset, function(d) { return d.Units; })*1.2])
+    //             .domain([0,50000])
+    //             .range([ height, 0 ]);
+    
+    // svg.append("g")
+    //   .call(d3.axisLeft(y));
+       
+    // const color = d3.scaleOrdinal()
+    //               .domain(mygroups)
+    //               .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999']);
+                  
+    // // Show the areas
+    // svg
+    //      .selectAll("mylayers")
+    //      .data(stackedData)
+    //      .enter()
+    //      .append("path")
+    //      .style("fill", function(d) { name = mygroups[d.key-1] ;  return color(name); })
+    //      .attr("d", d3.area()
+    //      .x(function(d, i) { return x(d.data.key); })
+    //      .y0(function(d) { return y(d[0]); })
+    //      .y1(function(d) { return y(d[1]); })
+    //  );
+
+}
+
+/*******************************************************************/
+/**
+  * makeGraphs11()
+  * 
+  */
+function makeGraphs11(dataset) {
     
     dataset.forEach(function(d) {
         d.Units = parseInt(d.Units);
