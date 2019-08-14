@@ -24,6 +24,7 @@ function makeGraphs(dataset) {
     
     dataset.forEach(function(d) {
         d.Units = parseInt(d.Units);
+        d.Year = parseInt(d.Year);
     });
     
     newVsOldStackedAreaChart(dataset);
@@ -61,63 +62,74 @@ function newVsOldStackedAreaChart(dataset) {
     //console.log(sumStat[0]);
     
     // {Year: "2008", Units: 60091, Type: "Used imports"}
-    console.log(sumStat[0].values[1]);
+    //console.log(sumStat[0].values[1]);
     
-    // returns a function called stack
+    // returns an array (see below)
     const stackedData = d3.stack()
-                    .keys([0, 1])
+                    .keys([0, 1]) // there is just two categories
                     .value(function(d, key) { 
                                return d.values[key].Units;
                     })(sumStat);
     
-    console.log(stackedData);
+    // [0, 151609, data: {key: "2008", values: Array(2)}]
+    //console.log(stackedData[0][0]);
     
-    //const mygroups = ["New cars","Used imports"];
+    // [151609, 211700, data: {key: "2008", values: Array(2)}]
+    //console.log(stackedData[1][0]);
+    // 211700
+    //console.log(stackedData[1][0][1]);
     
-    // const mygroup = [1,2,3] // list of group names
-  
-    // const stackedData = d3.stack()
-    //                       .keys(mygroup)
-    //                       .value(function(d, key){ 
-    //                                 return d.values[key].Units
-    //                             })(sumstat);
-
-    // //console.log(stackedData);
+    // x scale
+    const x = d3.scaleLinear()
+                .domain(d3.extent(stackedData[0], function(d) { return d.data.key; }))
+                .range([0, width]);
     
-    // // x-axis
-    // const x = d3.scaleLinear()
-    //             .domain(d3.extent(dataset, function(d) { return d.Year; }))
-    //             .range([ 0, width ]);
+    // 0
+    //console.log(x("2008"));
+    // 370
+    //console.log(x("2018"));
     
-    // svg.append("g")
-    //   .attr("transform", "translate(0," + height + ")")
-    //   .call(d3.axisBottom(x).ticks(5));
+    // x-axis
+    const xAxis = d3.axisBottom(x);
     
-    // // y-axis
-    // const y = d3.scaleLinear()
-    //             //.domain([0, d3.max(dataset, function(d) { return d.Units; })*1.2])
-    //             .domain([0,50000])
-    //             .range([ height, 0 ]);
+    svg.append("g")
+       .attr("transform", "translate(0," + height + ")")
+       .call(xAxis);
     
-    // svg.append("g")
-    //   .call(d3.axisLeft(y));
-       
-    // const color = d3.scaleOrdinal()
-    //               .domain(mygroups)
-    //               .range(['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33','#a65628','#f781bf','#999999']);
-                  
-    // // Show the areas
-    // svg
-    //      .selectAll("mylayers")
-    //      .data(stackedData)
-    //      .enter()
-    //      .append("path")
-    //      .style("fill", function(d) { name = mygroups[d.key-1] ;  return color(name); })
-    //      .attr("d", d3.area()
-    //      .x(function(d, i) { return x(d.data.key); })
-    //      .y0(function(d) { return y(d[0]); })
-    //      .y1(function(d) { return y(d[1]); })
-    //  );
+    // y scale
+    const y = d3.scaleLinear()
+                .domain([0, d3.max(stackedData[1], function(d) { return d[1]; })])
+                .range([height, 0]);
+    
+    // 200
+    //console.log(y(100000));
+    // 300
+    //console.log(y(0));
+    
+    // y axis
+    const yAxis = d3.axisLeft(y);
+    
+    svg.append("g")
+       .call(yAxis);
+    
+    // colours
+    //const mygroups = ["New cars", "Used Imports"];
+    
+    //const 
+    
+    // create the chart    
+    svg.append("g")
+       .selectAll("path")
+       .data(stackedData)
+       .enter()
+       .append("path")
+       //.style("fill", function(d) { return color(mygroups[d.key-1]); })
+       .attr("d",
+            d3.area()
+              .x(function(d, i) { return x(d.data.key); })
+              .y0(function(d) { return y(d[0]); })
+              .y1(function(d) { return y(d[1]); })
+        );
 
 }
 
