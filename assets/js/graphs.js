@@ -52,14 +52,27 @@ function newVsOldStackedAreaChart(dataset) {
          return parseInt(a.Year) - parseInt(b.Year);
     });
     
-    // group the data: one array for each value of the X axis.
-    const sumstat = d3.nest()
+    // nest the data: one array for each year
+    const sumStat = d3.nest()
                       .key(function(d) { return d.Year; })
                       .entries(dataset);
-
-    console.log(sumstat[0]);
     
-    // const mygroups = ["VOLKSWAGEN", "TOYOTA", "HYUNDAI"] // list of group names
+    // {key: "2008", values: Array(2)}
+    //console.log(sumStat[0]);
+    
+    // {Year: "2008", Units: 60091, Type: "Used imports"}
+    console.log(sumStat[0].values[1]);
+    
+    // returns a function called stack
+    const stackedData = d3.stack()
+                    .keys([0, 1])
+                    .value(function(d, key) { 
+                               return d.values[key].Units;
+                    })(sumStat);
+    
+    console.log(stackedData);
+    
+    //const mygroups = ["New cars","Used imports"];
     
     // const mygroup = [1,2,3] // list of group names
   
@@ -527,6 +540,7 @@ function mystackedareaplot(dataset) {
                       .key(function(d) { return d.Year; })
                       .entries(dataset);
 
+    
     //console.log(sumstat);
     
     const mygroups = ["VOLKSWAGEN", "TOYOTA", "HYUNDAI"] // list of group names
