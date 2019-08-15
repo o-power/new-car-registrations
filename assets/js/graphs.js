@@ -3,12 +3,12 @@
 //});
 
 Promise.all([
-    d3.csv("assets/data/UnitsByYear.csv")
+    d3.csv("assets/data/UnitsByYear.csv"),
+    d3.csv("assets/data/UnitsByColourAndYear.csv")
     //d3.csv("assets/data/UnitsByMakeAndYear.csv"),
-    //d3.csv("assets/data/UnitsByColourAndYear.csv"),
     //d3.json("assets/data/UnitsByMakeModelAndYear.json")
 ]).then(function(files) {
-    makeGraphs(files[0]);
+    makeGraphs(files[0], files[1]);
     //makeGraphs11(files[1]);
     //makeGraphs2(files[2]);
     //makeGraphs3(files[3]);
@@ -20,14 +20,21 @@ Promise.all([
   * makeGraphs()
   * 
   */
-function makeGraphs(dataset) {
+function makeGraphs(unitsByYear, unitsByColourAndYear) {
     
-    dataset.forEach(function(d) {
+    unitsByYear.forEach(function(d) {
         d.Units = parseInt(d.Units);
         d.Year = parseInt(d.Year);
     });
     
-    newVsOldStackedAreaChart(dataset);
+    unitsByColourAndYear.forEach(function(d) {
+        d.Units = parseInt(d.Units);
+        d.Rank = parseInt(d.Rank);
+        d.Year = parseInt(d.Year);
+    });
+    
+    newVsOldStackedAreaChart(unitsByYear);
+    colourBumpChart(unitsByColourAndYear);
 }
 
 /**
@@ -211,93 +218,11 @@ function newVsOldStackedAreaChart(dataset) {
                       
 }
 
-/*******************************************************************/
 /**
-  * makeGraphs11()
+  * colourBumpChart()
   * 
   */
-function makeGraphs11(dataset) {
-    
-    dataset.forEach(function(d) {
-        d.Units = parseInt(d.Units);
-    });
-
-    mybarplot(dataset.filter(function (d) { return d.Year == "2019"; }));
-    mystackedareaplot(dataset);
-    
-    // {Rank: "1", Make: "TOYOTA", Units: 21724, Year: "2008"}
-    //console.log(dataset[0]);
-    
-    // "1"
-    //console.log(dataset[0].Rank);
-    // "TOYOTA"
-    //console.log(dataset[0].Make);
-    // 21724
-    //console.log(dataset[0].Units);
-    // "2008"
-    //console.log(dataset[0].Year);
-    // 489
-    //console.log(dataset.length);
-}
-
-/**
-  * makeGraphs2()
-  * 
-  */
-function makeGraphs2(dataset) {
-    
-    dataset.forEach(function(d) {
-        d.Units = parseInt(d.Units);
-        d.Rank = parseInt(d.Rank);
-        d.Year = parseInt(d.Year);
-    });
-    
-    mybumpchart(dataset.filter(function (d) { return (d.Year > 2009); }));
-    
-    // {Colour: "Grey", Units: 30023, Year: 2019, Rank: 1, Class: "grey"}
-    //console.log(dataset[0]);
-}
-
-/**
-  * makeGraphs3()
-  * 
-  */
-function makeGraphs3(dataset) {
-    
-    // {children: Array(12), name: "UnitsByYearMakeModel"}
-    //console.log(dataset);
-    
-    // UnitsByYearMakeModel
-    //console.log(dataset.name);
-    
-    // {children: Array(35), name: "2019"}
-    //console.log(dataset.children[0]);
-    
-    // "2019"
-    //console.log(dataset.children[0].name);
-    
-    // {children: Array(11), name: "VOLVO"}
-    //console.log(dataset.children[0].children[0]);
-    
-    // "VOLVO"
-    //console.log(dataset.children[0].children[0].name);
-    
-    // {name: "XC60", value: 267}
-    //console.log(dataset.children[0].children[0].children[0]);
-    
-    // "XC60"
-    //console.log(dataset.children[0].children[0].children[0].name);
-    // 267
-    //console.log(dataset.children[0].children[0].children[0].value);
-    
-    mytreemap(dataset.children[0]);
-}
-
-/**
-  * mybumpchart()
-  * 
-  */
-function mybumpchart(dataset) {
+function colourBumpChart(dataset) {
     // Adapted from: http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a
 
     // Add a CSS safe class for use in hover interactions and coloring
@@ -314,7 +239,7 @@ function mybumpchart(dataset) {
          return parseInt(a.Year) - parseInt(b.Year);
     });
     
-    const chart = d3.select("#mybumpchart")
+    const chart = d3.select("#colour-bump-chart")
                     .append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
@@ -350,12 +275,12 @@ function mybumpchart(dataset) {
          .attr("class", "y axis")
          .call(yAxis);
          
-    chart.append("text")
-         .text("Popularity ranking of car colours")
-         .attr("text-anchor", "middle")
-         .attr("class", "graph-title")
-         .attr("y", -10)
-         .attr("x", width / 2.0);
+    // chart.append("text")
+    //      .text("Popularity ranking of car colours")
+    //      .attr("text-anchor", "middle")
+    //      .attr("class", "graph-title")
+    //      .attr("y", -10)
+    //      .attr("x", width / 2.0);
 
     chart.append("text")
          .text("Rank")
@@ -486,6 +411,88 @@ function mybumpchart(dataset) {
                     return !d3.select(this).classed("click-active");
                  });
          })
+}
+
+/*******************************************************************/
+/**
+  * makeGraphs11()
+  * 
+  */
+function makeGraphs11(dataset) {
+    
+    dataset.forEach(function(d) {
+        d.Units = parseInt(d.Units);
+    });
+
+    mybarplot(dataset.filter(function (d) { return d.Year == "2019"; }));
+    mystackedareaplot(dataset);
+    
+    // {Rank: "1", Make: "TOYOTA", Units: 21724, Year: "2008"}
+    //console.log(dataset[0]);
+    
+    // "1"
+    //console.log(dataset[0].Rank);
+    // "TOYOTA"
+    //console.log(dataset[0].Make);
+    // 21724
+    //console.log(dataset[0].Units);
+    // "2008"
+    //console.log(dataset[0].Year);
+    // 489
+    //console.log(dataset.length);
+}
+
+/**
+  * makeGraphs2()
+  * 
+  */
+function makeGraphs2(dataset) {
+    
+    dataset.forEach(function(d) {
+        d.Units = parseInt(d.Units);
+        d.Rank = parseInt(d.Rank);
+        d.Year = parseInt(d.Year);
+    });
+    
+    mybumpchart(dataset.filter(function (d) { return (d.Year > 2009); }));
+    
+    // {Colour: "Grey", Units: 30023, Year: 2019, Rank: 1, Class: "grey"}
+    //console.log(dataset[0]);
+}
+
+/**
+  * makeGraphs3()
+  * 
+  */
+function makeGraphs3(dataset) {
+    
+    // {children: Array(12), name: "UnitsByYearMakeModel"}
+    //console.log(dataset);
+    
+    // UnitsByYearMakeModel
+    //console.log(dataset.name);
+    
+    // {children: Array(35), name: "2019"}
+    //console.log(dataset.children[0]);
+    
+    // "2019"
+    //console.log(dataset.children[0].name);
+    
+    // {children: Array(11), name: "VOLVO"}
+    //console.log(dataset.children[0].children[0]);
+    
+    // "VOLVO"
+    //console.log(dataset.children[0].children[0].name);
+    
+    // {name: "XC60", value: 267}
+    //console.log(dataset.children[0].children[0].children[0]);
+    
+    // "XC60"
+    //console.log(dataset.children[0].children[0].children[0].name);
+    // 267
+    //console.log(dataset.children[0].children[0].children[0].value);
+    
+    mytreemap(dataset.children[0]);
 }
 
 /**
