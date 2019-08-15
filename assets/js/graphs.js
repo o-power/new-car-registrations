@@ -37,9 +37,9 @@ function makeGraphs(dataset) {
 function newVsOldStackedAreaChart(dataset) {
     // https://www.d3-graph-gallery.com/graph/stackedarea_basic.html
     
-    const margin = {top: 30, right: 30, bottom: 70, left: 60};
-    const width = 460 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+    const margin = {top: 30, right: 30, bottom: 30, left: 60};
+    const width = 600 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
 
     const svg = d3.select("#new-vs-old-stacked-area-chart")
                   .append("svg")
@@ -95,7 +95,8 @@ function newVsOldStackedAreaChart(dataset) {
     // x-axis
     const xAxis = d3.axisBottom(x)
                     // don't want commas displaying in years
-                    .tickFormat(d3.format("d"));;
+                    .tickFormat(d3.format("d"));
+                    
     
     svg.append("g")
        .attr("transform", "translate(0," + height + ")")
