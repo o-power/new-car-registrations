@@ -37,7 +37,7 @@ function makeGraphs(dataset) {
 function newVsOldStackedAreaChart(dataset) {
     // https://www.d3-graph-gallery.com/graph/stackedarea_basic.html
     
-    const margin = {top: 30, right: 30, bottom: 30, left: 60};
+    const margin = {top: 30, right: 30, bottom: 50, left: 70};
     const width = 600 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
@@ -102,6 +102,15 @@ function newVsOldStackedAreaChart(dataset) {
        .attr("transform", "translate(0," + height + ")")
        .call(xAxis);
     
+    // x axis label
+    svg.append("text")
+       .text("Year of registration")
+       .attr("text-anchor", "middle")
+       //.attr("class", "graph-title")
+       .attr("y", height + 40)
+       .attr("x", width / 2.0);
+    
+    
     // y scale
     const y = d3.scaleLinear()
                 .domain([0, d3.max(stackedData[1], function(d) { return d[1]; })])
@@ -117,6 +126,15 @@ function newVsOldStackedAreaChart(dataset) {
     
     svg.append("g")
        .call(yAxis);
+    
+    // y axis label
+    svg.append("text")
+         .text("Number cars")
+         .attr("text-anchor", "middle")
+         //.attr("class", "axes-labels")
+         .attr("y", -55)
+         .attr("x", height / -2.0)
+         .attr("transform", "rotate(-90)");
     
     // colours
     const color = d3.scaleOrdinal()
@@ -145,6 +163,31 @@ function newVsOldStackedAreaChart(dataset) {
               .y0(function(d) { return y(d[0]); })
               .y1(function(d) { return y(d[1]); })
         );
+    
+    // colour legend
+    // https://www.d3-graph-gallery.com/graph/custom_legend.html
+    svg.append("circle")
+       .attr("cx", (width / 4.0))
+       .attr("cy", 10)
+       .attr("r", 6)
+       .style("fill", color(mygroups[1]));
+    svg.append("circle")
+       .attr("cx", (width / 4.0))
+       .attr("cy", 10 + 30)
+       .attr("r", 6)
+       .style("fill", color(mygroups[0]));
+    svg.append("text")
+       .attr("x", (width / 4.0) + 20)
+       .attr("y", 10)
+       .text(mygroups[1])
+       .style("font-size", "15px")
+       .attr("alignment-baseline","middle");
+    svg.append("text")
+       .attr("x", (width / 4.0) + 20)
+       .attr("y", 10 + 30)
+       .text(mygroups[0])
+       .style("font-size", "15px")
+       .attr("alignment-baseline","middle");
 
 }
 
