@@ -110,7 +110,6 @@ function newVsOldStackedAreaChart(dataset) {
        .attr("y", height + 40)
        .attr("x", width / 2.0);
     
-    
     // y scale
     const y = d3.scaleLinear()
                 .domain([0, d3.max(stackedData[1], function(d) { return d[1]; })])
@@ -188,7 +187,28 @@ function newVsOldStackedAreaChart(dataset) {
        .text(mygroups[0])
        .style("font-size", "15px")
        .attr("alignment-baseline","middle");
+       
+    // tooltip
+    const tooltip = d3.select("body")
+                      .append("div")
+                      .attr("class", "tooltip");
+    
+    // display tooltips on hover
+    svg.selectAll("path")
+         .on("mouseover", function(d) {
+            const tooltip_str = mygroups[d.key];
 
+            tooltip.html(tooltip_str)
+                   .style("visibility", "visible");
+         })
+         .on("mousemove", function(d) {
+            tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
+                   .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+         })
+         .on("mouseout", function(d) {
+            tooltip.style("visibility", "hidden");
+         });
+                      
 }
 
 /*******************************************************************/
