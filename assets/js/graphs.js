@@ -238,69 +238,62 @@ function makeBumpChart(dataset) {
         d.Class = d.Make.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-');
     });
     
-    console.log(dataset);
-    // const margin = { top: 35, right: 0, bottom: 30, left: 70 };
-    // const width = 960 - margin.left - margin.right;
-    // const height = 500 - margin.top - margin.bottom;
+    const margin = { top: 35, right: 0, bottom: 30, left: 70 };
+    const width = 960 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
     
-    // // Sort data in ascending order
-    // dataset.sort(function(a, b) {
-    //      return parseInt(a.Year) - parseInt(b.Year);
-    // });
+    // Sort data in ascending order
+    dataset.sort(function(a, b) {
+        return parseInt(a.Year) - parseInt(b.Year);
+    });
     
-    // const chart = d3.select("#colour-bump-chart")
-    //                 .append("svg")
-    //                 .attr("width", width + margin.left + margin.right)
-    //                 .attr("height", height + margin.top + margin.bottom)
-    //                 .append("g")
-    //                 .attr("transform",`translate(${margin.left},${margin.top})`);
+    const chart = d3.select("#make-bump-chart")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform",`translate(${margin.left},${margin.top})`);
     
-    // // https://www.d3-graph-gallery.com/graph/custom_axis.html
-    // const x = d3.scaleBand()
-    //             .domain(dataset.map(function(d) { return d.Year; })) // this is what is written on the axis
-    //             .rangeRound([25, width - 15]); // this is where the axis is placed: from 25px to 945px
+    // https://www.d3-graph-gallery.com/graph/custom_axis.html
+    const x = d3.scaleBand()
+                .domain(dataset.map(function(d) { return d.Year; })) // this is what is written on the axis
+                .rangeRound([25, width - 15]); // this is where the axis is placed: from 25px to 945px
     
-    // const y = d3.scaleLinear()
-    //             .domain([d3.min(dataset, function(d) { return d.Rank; })
-    //                     ,d3.max(dataset, function(d) { return d.Rank; })]) // this is what is written on the axis
-    //             .range([20, height - 30]); // this is where the axis is placed: from 20px to 470px
+    const y = d3.scaleLinear()
+                .domain([d3.min(dataset, function(d) { return d.Rank; })
+                        ,d3.max(dataset, function(d) { return d.Rank; })]) // this is what is written on the axis
+                .range([20, height - 30]); // this is where the axis is placed: from 20px to 470px
 
-    // const xAxis = d3.axisBottom(x);
+    const xAxis = d3.axisBottom(x);
 
-    // const yAxis = d3.axisLeft(y)
-    //                 // http://using-d3js.com/04_03_axis.html
-    //                 .tickValues(d3.range(1
-    //                                     ,d3.max(dataset, function(d) { return d.Rank; })+1
-    //                                     ,1));
+    const yAxis = d3.axisLeft(y)
+                    // http://using-d3js.com/04_03_axis.html
+                    .tickValues(d3.range(1
+                                        ,d3.max(dataset, function(d) { return d.Rank; })+1
+                                        ,1));
     
-    // chart.append("g")
-    //      .attr("class", "x axis")
-    //      // the width of each band can be accessed using .bandwidth()
-    //      // this moves the axis tick to under the modes (circles)
-    //      .attr("transform", `translate(-${x.bandwidth()/2.0},${height})`)
-    //      .call(xAxis);
+    chart.append("g")
+         .attr("class", "x axis")
+         // the width of each band can be accessed using .bandwidth()
+         // this moves the axis tick to under the modes (circles)
+         .attr("transform", `translate(-${x.bandwidth()/2.0},${height})`)
+         .call(xAxis);
 
-    // chart.append("g")
-    //      .attr("class", "y axis")
-    //      .call(yAxis);
-         
-    // // chart.append("text")
-    // //      .text("Popularity ranking of car colours")
-    // //      .attr("text-anchor", "middle")
-    // //      .attr("class", "graph-title")
-    // //      .attr("y", -10)
-    // //      .attr("x", width / 2.0);
+    chart.append("g")
+         .attr("class", "y axis")
+         .call(yAxis);
 
-    // chart.append("text")
-    //      .text("Rank")
-    //      .attr("text-anchor", "middle")
-    //      .attr("class", "graph-title")
-    //      .attr("y", -35)
-    //      .attr("x", height / -2.0)
-    //      .attr("transform", "rotate(-90)");
+    chart.append("text")
+         .text("Rank")
+         .attr("text-anchor", "middle")
+         .attr("class", "graph-title")
+         .attr("y", -35)
+         .attr("x", height / -2.0)
+         .attr("transform", "rotate(-90)");
     
-    // // Linear gradient for multi-coloured category adapted from:
-    // // https://bl.ocks.org/EfratVil/484d0555f6f818ca6eea3de549a21e86
+    // Pattern gradients for car logo images adapted from:
+    // https://www.youtube.com/watch?v=yxr1IZ3MrAw
+    // https://www.youtube.com/watch?v=FUJjNG4zkWY
     // const defs = chart.append("defs");
     
     // const linearGradient = defs.append("linearGradient")
@@ -330,96 +323,84 @@ function makeBumpChart(dataset) {
     //               .attr("offset", "100%")
     //               .attr("stop-color", "#000000");
 
-    // const colours = d3.map(dataset, function(d) { return d.Colour; }).keys();
+    const makes = d3.map(dataset, function(d) { return d.Make; }).keys();
     
-    // // ["Silver/Aluminium", "Black", "Grey", "Blue", "Red/Maroon", "Gold", "White/Ivory", "Beige"
-    // // , "Brown", "Green", "Yellow", "Purple", "Bronze", "Orange", "Pink", "Multi-coloured"]
-    // //console.log(colours);
+    console.log(makes);
     
-    // // {Colour: "Silver/Aluminium", Units: 10, Year: 2019, Rank: 12, Class: "silver-aluminium"}
-    // //console.log(d3.map(dataset, function(d) { return d.Colour; }).values()[0]);
-    
-    // colours.forEach(function(colour) {
-    //     const currData = dataset.filter(function(d) { if (d.Colour == colour) { return d; } }); 
+    makes.forEach(function(make) {
+        const currData = dataset.filter(function(d) { if (d.Make == make) { return d; } }); 
         
-    //     // currData is an array with all the rows for a particular colour
-    //     // {Colour: "Silver/Aluminium", Units: 21534, Year: 2010, Rank: 1, Class: "silver-aluminium"}
-    //     //console.log(currData[0]);
+        // D3 line generator
+        const line = d3.line()
+                      .x(function(d) { return x(d.Year); })
+                      .y(function(d) { return y(d.Rank); });
         
-    //     // D3 line generator
-    //     const line = d3.line()
-    //                   .x(function(d) { return x(d.Year); })
-    //                   .y(function(d) { return y(d.Rank); });
-        
-    //     chart.append("path")
-    //          .datum(currData)
-    //          .attr("class", colour.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-') )
-    //          .attr("style", "fill:none !important")
-    //          .attr("stroke-linejoin", "round")
-    //          .attr("stroke-linecap", "round")
-    //          .attr("stroke-width", 2)
-    //          .attr("stroke-opacity", 0.3)
-    //          .attr("d", line);
+        chart.append("path")
+             .datum(currData)
+             .attr("class", make.toLowerCase().replace(/ /g, '-').replace(/\./g,'').replace(/\//g,'-') )
+             .attr("style", "fill:none !important")
+             .attr("stroke-linejoin", "round")
+             .attr("stroke-linecap", "round")
+             .attr("stroke-width", 2)
+             .attr("stroke-opacity", 0.3)
+             .attr("d", line);
              
-    // }); // for each colour
+    }); // for each make
     
-    // // nodes (circles)
-    // const node = chart.append("g")
-    //                   .selectAll("circle")
-    //                   .data(dataset)
-    //                   .enter()
-    //                   .append("circle")
-    //                   .attr("cx", function(d) { return x(d.Year); })
-    //                   .attr("cy", function(d) { return y(d.Rank); })
-    //                   .attr("fill", "blue")
-    //                   .attr("class", function(d) { return d.Class; })
-    //                   .attr("r", 6)
-    //                   .attr("stroke-width", 1.5)
-    //                   .attr("opacity", 0.8);
+    // nodes (circles)
+    const node = chart.append("g")
+                      .selectAll("circle")
+                      .data(dataset)
+                      .enter()
+                      .append("circle")
+                      .attr("cx", function(d) { return x(d.Year); })
+                      .attr("cy", function(d) { return y(d.Rank); })
+                      .attr("fill", "blue")
+                      .attr("class", function(d) { return d.Class; })
+                      .attr("r", 6)
+                      .attr("stroke-width", 1.5)
+                      .attr("opacity", 0.8);
                     
-    // // tooltips
-    // const tooltip = d3.select("body")
-    //                   .append("div")
-    //                   .attr("class", "tooltip");
+    // tooltips
+    const tooltip = d3.select("body")
+                      .append("div")
+                      .attr("class", "tooltip");
     
-    // // a single div element with class="tooltip"
-    // //console.log(tooltip);
-    
-    // // interactivity
-    // chart.selectAll("circle")
-    //      .on("mouseover", function(d) {
-    //         chart.selectAll('.' + d.Class)
-    //              // adds the class active to the line and circles for this colour
-    //              .classed('active', true);
+    // interactivity
+    chart.selectAll("circle")
+         .on("mouseover", function(d) {
+            chart.selectAll('.' + d.Class)
+                 // adds the class active to the line and circles for this colour
+                 .classed('active', true);
 
-    //         const tooltip_str = "Colour: " + d.Colour +
-    //                             "<br/>" + "Year: " + d.Year +
-    //                             "<br/>" + "Units: " + d.Units +
-    //                             "<br/>" + "Rank: " + d.Rank;
+            const tooltip_str = "Make: " + d.Make +
+                                "<br/>" + "Year: " + d.Year +
+                                "<br/>" + "Units: " + d.Units +
+                                "<br/>" + "Rank: " + d.Rank;
 
-    //         tooltip.html(tooltip_str)
-    //               .style("visibility", "visible");
-    //      })
-    //      .on("mousemove", function(d) {
-    //         tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
-    //               .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
-    //      })
-    //      .on("mouseout", function(d) {
-    //         chart.selectAll('.'+d.Class)
-    //              .classed('active', false);
+            tooltip.html(tooltip_str)
+                  .style("visibility", "visible");
+         })
+         .on("mousemove", function(d) {
+            tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
+                  .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+         })
+         .on("mouseout", function(d) {
+            chart.selectAll('.'+d.Class)
+                 .classed('active', false);
 
-    //         tooltip.style("visibility", "hidden");
-    //      })
-    //      // so user can click on multiple colours and highlight them to make it easier to compare
-    //      // classed("click-active") returns true if any element in the selection has the class
-    //      // the function in classed is evaluated for each element in the selection
-    //      .on("click", function(d) {
-    //         chart.selectAll('.' + d.Class)
-    //              .classed("click-active", function(d) {
-    //                 // toggle state
-    //                 return !d3.select(this).classed("click-active");
-    //              });
-    //      })
+            tooltip.style("visibility", "hidden");
+         })
+         // so user can click on multiple colours and highlight them to make it easier to compare
+         // classed("click-active") returns true if any element in the selection has the class
+         // the function in classed is evaluated for each element in the selection
+         .on("click", function(d) {
+            chart.selectAll('.' + d.Class)
+                 .classed("click-active", function(d) {
+                    // toggle state
+                    return !d3.select(this).classed("click-active");
+                 });
+         })
 }
   
 /**

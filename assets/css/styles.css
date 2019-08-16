@@ -1,6 +1,57 @@
-/* ==========================================================================
-    Bump charts
-========================================================================== */
+/*
+ * Bump Charts
+ *
+*/
+
+/* class for each car make */
+.volkswagen {
+    /*fill: url(#grump_avatar);*/
+    stroke: #808080;
+}
+
+.toyota {
+    stroke: #808080;
+}
+
+.ford {
+    stroke: #808080;
+}
+
+.opel {
+    stroke: #808080;
+}
+
+.nissan {
+    stroke: #808080;
+}
+
+.renault {
+    stroke: #808080;
+}
+
+.bmw {
+    stroke: #808080;
+}
+
+.peugeot {
+    stroke: #808080;
+}
+
+.hyundai {
+    stroke: #808080;
+}
+
+.audi {
+    stroke: #808080;
+}
+
+.skoda {
+    stroke: #808080;
+}
+
+.kia {
+    stroke: #808080;
+}
 
 /* class for each car colour */
 .grey {
