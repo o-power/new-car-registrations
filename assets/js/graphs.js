@@ -4,11 +4,11 @@
 
 Promise.all([
     d3.csv("assets/data/UnitsByYear.csv"),
+    d3.csv("assets/data/UnitsByMakeAndYear.csv"),
     d3.csv("assets/data/UnitsByColourAndYear.csv"),
     d3.json("assets/data/UnitsByMakeModelAndYear.json")
-    //d3.csv("assets/data/UnitsByMakeAndYear.csv"),
 ]).then(function(files) {
-    makeGraphs(files[0], files[1], files[2]);
+    makeGraphs(files[0], files[1], files[2], files[3]);
     //makeGraphs11(files[1]);
     //makeGraphs2(files[2]);
     //makeGraphs3(files[3]);
@@ -20,10 +20,16 @@ Promise.all([
   * makeGraphs()
   * 
   */
-function makeGraphs(unitsByYear, unitsByColourAndYear, unitsByMakeModelAndYear) {
+function makeGraphs(unitsByYear, unitsByMakeAndYear, unitsByColourAndYear, unitsByMakeModelAndYear) {
     
     unitsByYear.forEach(function(d) {
         d.Units = parseInt(d.Units);
+        d.Year = parseInt(d.Year);
+    });
+    
+    unitsByMakeAndYear.forEach(function(d) {
+        d.Units = parseInt(d.Units);
+        d.Rank = parseInt(d.Rank);
         d.Year = parseInt(d.Year);
     });
     
@@ -34,8 +40,9 @@ function makeGraphs(unitsByYear, unitsByColourAndYear, unitsByMakeModelAndYear) 
     });
     
     newVsOldStackedAreaChart(unitsByYear);
-    colourBumpChart(unitsByColourAndYear);
+    //makeBumpChart(unitsByMakeAndYear);
     makeModelTreemap(unitsByMakeModelAndYear.children[0]);
+    colourBumpChart(unitsByColourAndYear);
 }
 
 /**
