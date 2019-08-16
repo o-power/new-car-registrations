@@ -296,22 +296,24 @@ function makeBumpChart(dataset) {
     // https://www.youtube.com/watch?v=FUJjNG4zkWY
     const defs = chart.append("defs");
     
-    // use makes.forEach here
-    const patternGradient = defs.append("pattern")
-                                 .attr("id", "volkswagen-logo");
-    
-    patternGradient.attr("height", "100%")
-                   .attr("width", "100%")
-                   .attr("patternContentUnits", "objectBoundingBox");
-                   
-    patternGradient.append("image")
-                   .attr("height", "1")
-                   .attr("width", "1")
-                   .attr("preserveAspectRatio", "none")
-                   .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
-                   .attr("xlink:href", "assets/images/VOLKSWAGEN.png");
-
     const makes = d3.map(dataset, function(d) { return d.Make; }).keys();
+    
+    //makes.forEach(function(make) {
+        const patternGradient = defs.append("pattern")
+                                     //.attr("id", ${d.Class}-logo);
+                                     .attr("id", "volkswagen-logo");
+        
+        patternGradient.attr("height", "100%")
+                       .attr("width", "100%")
+                       .attr("patternContentUnits", "objectBoundingBox");
+                       
+        patternGradient.append("image")
+                       .attr("height", "1")
+                       .attr("width", "1")
+                       .attr("preserveAspectRatio", "none")
+                       .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+                       .attr("xlink:href", "assets/images/VOLKSWAGEN.jpg");
+    //}
     
     makes.forEach(function(make) {
         const currData = dataset.filter(function(d) { if (d.Make == make) { return d; } }); 
