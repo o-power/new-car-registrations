@@ -5,7 +5,7 @@
 
 /* class for each car make */
 .volkswagen {
-    /*fill: url(#grump_avatar);*/
+    fill: url(#volkswagen-logo);
     stroke: #808080;
 }
 
@@ -154,6 +154,7 @@
     opacity: 1.0;
     stroke-opacity: 1.0;
     z-index: 1000;
+    r: 20;
 }
 
 path.click-active {
