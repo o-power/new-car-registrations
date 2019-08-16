@@ -291,37 +291,15 @@ function makeBumpChart(dataset) {
          .attr("x", height / -2.0)
          .attr("transform", "rotate(-90)");
     
-    // Pattern gradients for car logo images adapted from:
+    // Patterns for car logo images adapted from:
     // https://www.youtube.com/watch?v=yxr1IZ3MrAw
     // https://www.youtube.com/watch?v=FUJjNG4zkWY
-    // const defs = chart.append("defs");
+    const defs = chart.append("defs");
     
-    // const linearGradient = defs.append("linearGradient")
-    // 		                   .attr("id", "myGradient");
+    const patternGradient = defs.append("pattern")
+                                 .attr("id", "volkswagen-logo");
     
-    // linearGradient.append("stop")
-    //               .attr("offset", "0%")
-    //               .attr("stop-color", "#FF0000");
-                  
-    // linearGradient.append("stop")
-    //               .attr("offset", "20%")
-    //               .attr("stop-color", "#0000FF");
-                  
-    // linearGradient.append("stop")
-    //               .attr("offset", "40%")
-    //               .attr("stop-color", "#FFFF00");
-                  
-    // linearGradient.append("stop")
-    //               .attr("offset", "60%")
-    //               .attr("stop-color", "#800080");
-                  
-    // linearGradient.append("stop")
-    //               .attr("offset", "80%")
-    //               .attr("stop-color", "#FFA500");
-                  
-    // linearGradient.append("stop")
-    //               .attr("offset", "100%")
-    //               .attr("stop-color", "#000000");
+    //patternGradient.
 
     const makes = d3.map(dataset, function(d) { return d.Make; }).keys();
     
