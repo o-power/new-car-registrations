@@ -1,5 +1,5 @@
 /* ==========================================================================
-    Bump chart
+    Bump charts
 ========================================================================== */
 
 /* class for each car colour */
@@ -97,7 +97,7 @@
     visibility: hidden;
 }
 
-/* formatting for when user hovers over or clicks on a car colour */
+/* formatting for when user hovers over or clicks on bump chart */
 .click-active,
 .active {
     opacity: 1.0;
