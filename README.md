@@ -24,6 +24,7 @@ Desktop and mobile wireframes.
 ## Features
 ### Existing
 ### Future
+* The functions which build the charts could be made more generic and so reusable.
 
 ## Data Preparation
 Data for each year was downloaded separately from https://stats.beepbeep.ie/.
