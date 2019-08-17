@@ -47,9 +47,18 @@ All the links were checked to ensure they were working.
 Bugs and fixes.
 
 ## Deployment
-The site is hosted using GitHub pages and is deployed directly from the master branch. The deployed site will update automatically upon new commits to the master branch. In order for the site to deploy correctly on GitHub pages, the landing page must be named index.html.
+The project was developed on AWS Cloud9. A repository was created on GitHub and regular commits were made.
 
-To run locally, clone this repository directly into the editor of your choice by pasting git clone https://github.com/o-power/xxxxxx.git into your terminal. To cut ties with this repository, type git remote rm origin into the terminal.
+The project was then deployed using GitHub pages. It is deployed directly from the master branch. The deployed site will update automatically upon new commits to the master branch. In order for the site to deploy correctly on GitHub pages, the landing page must be named index.html.
+
+To deploy the project on GitHub pages, the following steps were followed.
+1. Log into Github
+2. Select the repository o-power/new-car-registrations.
+3. Select the Settings tab.
+4. Scroll down to the section called GitHub Pages.
+5. Under Source, select master branch from the dropdown.
+6. The page will refresh and a message will appear in the GitHub Pages section saying "Your site is published at https://o-power.github.io/new-car-registrations/".
+7. It may take several minutes before the deployed site is ready to be viewed.
 
 ## Credits
 ### Content
