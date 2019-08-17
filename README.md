@@ -64,4 +64,5 @@ To run locally, clone this repository directly into the editor of your choice by
 * Stacked area chart is adapted from [D3.js Graph Gallery](https://www.d3-graph-gallery.com/graph/stackedarea_basic.html) [accessed 17th August 2019].
 * Colour legend on stacked area chart is adapted from [D3.js Graph Gallery](https://www.d3-graph-gallery.com/graph/custom_legend.html) [accessed 17th August 2019].
 * Bump chart is adapted from Chas Jhin's example on [https://bl.ocks.org](http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a) [accessed 17th August 2019].
+* Adding images using patterns was adapted from Jonathan Soma's [Using images in D3 bubble charts, Part 2 (SVG defs/images in d3)](https://www.youtube.com/watch?v=FUJjNG4zkWY) [accessed 17th August 2019].
 * Treemap is adapted from [D3.js Graph Gallery](https://www.d3-graph-gallery.com/graph/treemap_custom.html) [accessed 17th August 2019].
