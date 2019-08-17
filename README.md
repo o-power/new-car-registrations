@@ -1,6 +1,5 @@
-# Irish New Car Registrations
-Dashboard showing passenger car registrations in Ireland from 2010 to 29th July 2019.
-https://stats.beepbeep.ie/
+# New Private Car Registrations in Ireland 
+Dashboard showing passenger car registrations in Ireland from 2010 to 2018.
 
 ## Demo
 A live demo can be found here on Github Pages.
@@ -53,7 +52,12 @@ To run locally, clone this repository directly into the editor of your choice by
 
 ## Credits
 ### Content
+* New private car registrations data was taken from [beepbeep.ie](https://stats.beepbeep.ie/) [accessed 29th July 2019].
+* Used imports data was taken from [CSO Statbank table TEA01](https://www.cso.ie/px/pxeirestat/Statire/SelectVarVal/Define.asp?Maintable=TEA01&Planguage=0) [accessed 17th August 2019].
+* Census 2016 population by county was taken from [CSO Statbank E2001](https://www.cso.ie/px/pxeirestat/Statire/SelectVarVal/Define.asp?Maintable=E2001&Planguage=0) [accessed 17th August 2019].
+
 ### Media
+* Car logos were taken from [stickpng.com](https://www.stickpng.com/) [accessed 16th August 2019].
+
 ### Acknowledgements
-Bump chart is modifed fromm Chas Jhin's example on Bl.ocks
-http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a
+Bump chart is modifed fromm Chas Jhin's example on [https://bl.ocks.org/](http://bl.ocks.org/cjhin/b7a5f24a0853524414b06124c559961a) [accessed 17th August 2019].
