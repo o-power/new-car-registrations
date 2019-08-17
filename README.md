@@ -1,5 +1,5 @@
 # New Private Car Registrations in Ireland 
-Dashboard showing passenger car registrations in Ireland from 2010 to 2018.
+Dashboard showing passenger car registrations in Ireland from 2010 to 2018. Single-page website.
 
 ## Demo
 The deployed site can be found [here](https://o-power.github.io/new-car-registrations/) on GitHub Pages.
@@ -9,6 +9,11 @@ The deployed site can be found [here](https://o-power.github.io/new-car-registra
 Wireframes can be found in the wireframes folder.
 Desktop and mobile wireframes.
 ### User Stories
+* I want to understand the trend in total new car registrations in Ireland.
+* I want to understand which car makes have increased/decreased in popularity.
+* I want to understand which car models make up the most new car sales.
+* I want to understand which car colours have increased/decreased in popularity.
+* I want to understand which counties buy the most new cars per head of population.
 
 ## Technologies/Libraries
 1. HTML
@@ -49,6 +54,15 @@ All the links were checked to ensure they were working.
 Bugs and fixes.
 
 Was not required to be responsive.
+### User Story Testing
+* I want to understand the trend in total new car registrations in Ireland.
+  The stacked area chart shows the trend in total new car registrations in Ireland. It also shows how the downward trend in recent years may be attributed to the increase in used car imports.
+* I want to understand which car makes have increased/decreased in popularity.
+  The bump chart with the car logos shows how the ranking of the different car makes has changed. It easily allows us to compare a relatively large number of categories (the top 10 car makes).
+* I want to understand which car models make up the most new car sales.
+  
+* I want to understand which car colours have increased/decreased in popularity.
+* I want to understand which counties buy the most new cars per head of population.
 
 ## Deployment
 The project was developed on AWS Cloud9. A repository was created on GitHub and regular commits were made.
@@ -81,3 +95,4 @@ To deploy the project on GitHub pages, the following steps were followed.
 * Adding images using patterns was adapted from Jonathan Soma's [Using images in D3 bubble charts, Part 2 (SVG defs/images in d3)](https://www.youtube.com/watch?v=FUJjNG4zkWY) [accessed 17th August 2019].
 * Treemap is adapted from [D3.js Graph Gallery](https://www.d3-graph-gallery.com/graph/treemap_custom.html) [accessed 17th August 2019].
 * Shortcut icon generated using [Favicon Generator](https://realfavicongenerator.net/) [accessed 17th August 2019].
+* Using a bump chart to compare the popularity of car colours was inspired by [Sir Viz-a-Lot's example using US car sales](https://www.sirvizalot.com/2016/03/color-popularity-for-new-cars-2000-2015.html) [accessed 17th August 2019].
