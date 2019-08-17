@@ -84,6 +84,8 @@ To deploy the project on GitHub pages, the following steps were followed.
 6. The page will refresh and a message will appear in the GitHub Pages section saying "Your site is published at https://o-power.github.io/new-car-registrations/".
 7. It may take several minutes before the deployed site is ready to be viewed.
 
+To run locally, clone this repository directly into the editor of your choice by pasting `git clone https://github.com/o-power/new-car-registrations.git` into your terminal. To cut ties with this repository, type `git remote rm origin` into the terminal.
+
 ## Credits
 ### Content
 * New private car registrations data was taken from [beepbeep.ie](https://stats.beepbeep.ie/) [accessed 29th July 2019].
