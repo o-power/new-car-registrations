@@ -26,10 +26,12 @@ Desktop and mobile wireframes.
 ### Future
 * The functions which build the charts could be made more generic and so reusable.
 
+* The charts could be made responsive by using the [viewBox attribute](https://medium.com/@louisemoxy/a-simple-way-to-make-d3-js-charts-svgs-responsive-7afb04bc2e4b).
+
 ## Data Preparation
-Data for each year was downloaded separately from https://stats.beepbeep.ie/.
-Alteryx Designer was used to combine the data for different years.
-The treemap required the data to be in a JSON format and Alteryx Designer was used to convert the data from CSV to JSON with the necessary hierarchial structure.
+Data for each year was downloaded separately from [beepbeep.ie](https://stats.beepbeep.ie/). Alteryx Designer was used to combine and clean the data. For the car colours data the multi-coloured category was substituted for any colour category containing the word "and".
+
+The treemap required the data to be in a JSON format with the necessary hierarchial structure. Alteryx Designer was used to build this hierarchy and to convert the data from CSV to JSON.
 
 ## Testing
 The HTML was checked using the W3C Markup Validation Service.
@@ -45,6 +47,8 @@ Different browsers.
 All the links were checked to ensure they were working.
 
 Bugs and fixes.
+
+Was not required to be responsive.
 
 ## Deployment
 The project was developed on AWS Cloud9. A repository was created on GitHub and regular commits were made.
