@@ -2,8 +2,7 @@
 Dashboard showing passenger car registrations in Ireland from 2010 to 2018.
 
 ## Demo
-A live demo can be found here on Github Pages.
-Add screenshots.
+The deployed site can be found [here](https://o-power.github.io/new-car-registrations/) on GitHub Pages.
 
 ## UX
 ### Wireframes
@@ -14,12 +13,13 @@ Desktop and mobile wireframes.
 ## Technologies/Libraries
 1. HTML
 2. CSS
-3. Flexbox
-4. JavaScript
-5. D3
-6. AWS Cloud9
-7. GitHub
-8. Alteryx Designer
+3. JavaScript
+4. [Bootstrap](https://getbootstrap.com/) was used to manage the layout of the site.
+5. [D3](https://d3js.org/) was used to build the charts.
+6. [GitHub](https://github.com/) was used for source control and deployment.
+7. [AWS Cloud](https://aws.amazon.com/cloud9/) was used as the development environment for the project.
+8. [Alteryx Designer](https://www.alteryx.com/) was used to prepare the data. Alteryx Designer is a drag-and-drop tool for rapid data preparation.
+9. [Gimp](https://www.gimp.org) was used to reduce the file size of the car logos for the bump chart.
 
 ## Features
 ### Existing
