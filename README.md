@@ -1,13 +1,17 @@
-# New Private Car Registrations in Ireland 
-Dashboard showing passenger car registrations in Ireland from 2010 to 2018. Single-page website.
+# New Private Car Registrations in Ireland
+This project is a single-page website containing an interactive data dashboard. The dashboard explores new private car registrations in Ireland from 2008 to 2018.
+
+Topics explored include: (1) new car sales vs used imports, (2) the popularity ranking of car makes, (3) the composition of new car sales by car model, (4) the popularity ranking of car colours, (5) the number of new car sales in each county per head of population.
 
 ## Demo
 The deployed site can be found [here](https://o-power.github.io/new-car-registrations/) on GitHub Pages.
 
 ## UX
 ### Wireframes
-Wireframes can be found in the wireframes folder.
-Desktop and mobile wireframes.
+Desktop wireframes can be found in the wireframes folder.
+
+Mobile wireframes are not included as per the project requirements: "Please note that if you are building a data dashboard, only your chart containers are expected to be responsive. Charts using D3.js are not responsive as they are designed for desktop or large-screen viewing."
+
 ### User Stories
 * I want to understand the trend in total new car registrations in Ireland.
 * I want to understand which car makes have increased/decreased in popularity.
