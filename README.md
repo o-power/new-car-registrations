@@ -58,11 +58,13 @@ Was not required to be responsive.
 * I want to understand the trend in total new car registrations in Ireland.
   The stacked area chart shows the trend in total new car registrations in Ireland. It also shows how the downward trend in recent years may be attributed to the increase in used car imports.
 * I want to understand which car makes have increased/decreased in popularity.
-  The bump chart with the car logos shows how the ranking of the different car makes has changed. It easily allows us to compare a relatively large number of categories (the top 10 car makes).
+  The bump chart with the car logos shows how the ranking of the different car makes has changed. It easily allows the user to compare the time evolution of a relatively large number of categories (the top 10 car makes).
 * I want to understand which car models make up the most new car sales.
-  
+  The treemap shows new car sales by every make and model. Although overwhelming at first, it has the advantage of not hiding any information. The user can explore the details using the tooltips.
 * I want to understand which car colours have increased/decreased in popularity.
+  The bump chart with the car colours shows how the ranking of the different car colours has changed. Again, it easily allows the user to compare the time evolution of a relatively large number of categories (16 colours).
 * I want to understand which counties buy the most new cars per head of population.
+  The map shows the number of new car sales per 100 adults in each county.
 
 ## Deployment
 The project was developed on AWS Cloud9. A repository was created on GitHub and regular commits were made.
