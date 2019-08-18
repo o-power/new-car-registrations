@@ -6,7 +6,7 @@
 /* class for each car make */
 .volkswagen {
     fill: url(#volkswagen-logo);
-    stroke: #808080;
+    stroke: #003B73;
 }
 
 .toyota {
@@ -16,7 +16,7 @@
 
 .ford {
     fill: url(#ford-logo);
-    stroke: #808080;
+    stroke: #0B518C;
 }
 
 .opel {
@@ -61,7 +61,7 @@
 
 .kia {
     fill: url(#kia-logo);
-    stroke: #808080;
+    stroke: #E61028;
 }
 
 /* class for each car colour */
