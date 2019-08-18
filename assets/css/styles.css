@@ -1,8 +1,3 @@
-/*
- * Bump Charts
- *
-*/
-
 /* class for each car make */
 .volkswagen {
     fill: url(#volkswagen-logo);
@@ -11,52 +6,52 @@
 
 .toyota {
     fill: url(#toyota-logo);
-    stroke: #808080;
+    stroke: #E50000;
 }
 
 .ford {
     fill: url(#ford-logo);
-    stroke: #0B518C;
+    stroke: #003376;
 }
 
 .opel {
     fill: url(#opel-logo);
-    stroke: #808080;
+    stroke: #F7D900;
 }
 
 .nissan {
     fill: url(#nissan-logo);
-    stroke: #808080;
+    stroke: #C3092F;
 }
 
 .renault {
     fill: url(#renault-logo);
-    stroke: #808080;
+    stroke: #FFCE00;
 }
 
 .bmw {
     fill: url(#bmw-logo);
-    stroke: #000;
+    stroke: #000000;
 }
 
 .peugeot {
     fill: url(#peugeot-logo);
-    stroke: #808080;
+    stroke: #162133;
 }
 
 .hyundai {
     fill: url(#hyundai-logo);
-    stroke: #808080;
+    stroke: #003469;
 }
 
 .audi {
     fill: url(#audi-logo);
-    stroke: #808080;
+    stroke: #4C4C4C;
 }
 
 .skoda {
     fill: url(#skoda-logo);
-    stroke: #016742;
+    stroke: #4BA82E;
 }
 
 .kia {
@@ -201,6 +196,3 @@ path.active {
 .x.axis path {
     display: none;
 }
-
-/* .graph-title */
-/* .point */
