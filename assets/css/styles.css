@@ -36,7 +36,7 @@
 
 .bmw {
     fill: url(#bmw-logo);
-    stroke: #808080;
+    stroke: #000;
 }
 
 .peugeot {
@@ -56,7 +56,7 @@
 
 .skoda {
     fill: url(#skoda-logo);
-    stroke: #808080;
+    stroke: #016742;
 }
 
 .kia {

@@ -296,23 +296,6 @@ function makeBumpChart(dataset) {
     // https://www.youtube.com/watch?v=FUJjNG4zkWY
     const defs = chart.append("defs");
     
-    // //makes.forEach(function(make) {
-    //     const patternGradient = defs.append("pattern")
-    //                                  //.attr("id", ${d.Class}-logo);
-    //                                  .attr("id", "volkswagen-logo");
-        
-    //     patternGradient.attr("height", "100%")
-    //                   .attr("width", "100%")
-    //                   .attr("patternContentUnits", "objectBoundingBox");
-                       
-    //     patternGradient.append("image")
-    //                   .attr("height", "1")
-    //                   .attr("width", "1")
-    //                   .attr("preserveAspectRatio", "none")
-    //                   .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
-    //                   .attr("xlink:href", "assets/images/VOLKSWAGEN.jpg");
-    // //}
-    
     const makeClasses = d3.map(dataset, function(d) { return d.Class; }).keys();
     
     const patternGradient = defs.selectAll("pattern")
@@ -397,7 +380,7 @@ function makeBumpChart(dataset) {
             tooltip.style("visibility", "hidden");
          })
          // so user can click on multiple colours and highlight them to make it easier to compare
-         // classed("click-active") returns true if any element in the selection has the class
+         // classed("click-active-makes") returns true if any element in the selection has the class
          // the function in classed is evaluated for each element in the selection
          .on("click", function(d) {
             chart.selectAll('.' + d.Class)
