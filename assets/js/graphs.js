@@ -785,12 +785,8 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
     // interactivity
     svg.selectAll("path")
         .on("mouseover", function(d) {
-            // const tooltip_str = "Year: " + d.parent.parent.data.name +
-            //                     "<br/>" + "Make: " + d.parent.data.name +
-            //                     "<br/>" + "Model: " + d.data.name +
-            //                     "<br/>" + "Units: " + d.data.value;
-            const tooltip_str = "hello";
-            console.log(d.properties.NAME_1);
+            const tooltip_str = "County: " + d.properties.NAME_1 +
+                                "<br/>" + "New cars per 100 adults: " + data.get(d.properties.NAME_1);
             
             tooltip.html(tooltip_str)
                    .style("visibility", "visible");
