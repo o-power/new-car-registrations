@@ -106,3 +106,4 @@ To run locally, clone this repository directly into the editor of your choice by
 * Treemap is adapted from [D3.js Graph Gallery](https://www.d3-graph-gallery.com/graph/treemap_custom.html) [accessed 17th August 2019].
 * Shortcut icon generated using [Favicon Generator](https://realfavicongenerator.net/) [accessed 17th August 2019].
 * Using a bump chart to compare the popularity of car colours was inspired by [Sir Viz-a-Lot's example using US car sales](https://www.sirvizalot.com/2016/03/color-popularity-for-new-cars-2000-2015.html) [accessed 17th August 2019].
+* The map was adapted from Mike Bostock's example on [https://bl.ocks.org](https://bl.ocks.org/mbostock/4122298). The labels were added using ideas from the [D3.js Graph Gallery](https://www.d3-graph-gallery.com/graph/choropleth_basic.html) and a [TopoJSON map of Ireland with cities](https://codepen.io/robjoeol/pen/qKReXy) [accessed 18th August 2019].
