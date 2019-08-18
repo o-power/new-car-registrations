@@ -216,19 +216,26 @@ function newVsOldStackedAreaChart(dataset) {
             
             const mouseNearestYear = Math.round(x.invert(mouseXY[0]));
             
-            const mouseNearestRow = d.filter(function(d) {return parseInt(d.data.key) == mouseNearestYear; });
-            
-            //console.log(mouseNearestRow[0])
-            
-            const tooltip_str = mygroups[d.key] +
+            try {
+                const mouseNearestRow = d.filter(function(d) {return parseInt(d.data.key) == mouseNearestYear; });
+                
+                const tooltip_str = mygroups[d.key] +
                                 "<br/>" + "Year: " + mouseNearestRow[0].data.key +
                                 "<br/>" + "Units: " + (mouseNearestRow[0][1] - mouseNearestRow[0][0]);
-                                
-            tooltip.html(tooltip_str)
-                   .style("visibility", "visible");
+                
+                //console.log(mouseNearestRow[0])
+                
+                tooltip.html(tooltip_str)
+                       .style("visibility", "visible");
+                
+                tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
+                      .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
             
-            tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
-                  .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+                
+            } catch(err) {
+                // mouse moved too quickly across chart to display tooltip
+            }
+            
         })
         .on("mouseout", function(d) {
             tooltip.style("visibility", "hidden");
