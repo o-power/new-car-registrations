@@ -296,24 +296,41 @@ function makeBumpChart(dataset) {
     // https://www.youtube.com/watch?v=FUJjNG4zkWY
     const defs = chart.append("defs");
     
-    const makes = d3.map(dataset, function(d) { return d.Make; }).keys();
-    
-    //makes.forEach(function(make) {
-        const patternGradient = defs.append("pattern")
-                                     //.attr("id", ${d.Class}-logo);
-                                     .attr("id", "volkswagen-logo");
+    // //makes.forEach(function(make) {
+    //     const patternGradient = defs.append("pattern")
+    //                                  //.attr("id", ${d.Class}-logo);
+    //                                  .attr("id", "volkswagen-logo");
         
-        patternGradient.attr("height", "100%")
-                       .attr("width", "100%")
-                       .attr("patternContentUnits", "objectBoundingBox");
+    //     patternGradient.attr("height", "100%")
+    //                   .attr("width", "100%")
+    //                   .attr("patternContentUnits", "objectBoundingBox");
                        
-        patternGradient.append("image")
-                       .attr("height", "1")
-                       .attr("width", "1")
-                       .attr("preserveAspectRatio", "none")
-                       .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
-                       .attr("xlink:href", "assets/images/VOLKSWAGEN.jpg");
-    //}
+    //     patternGradient.append("image")
+    //                   .attr("height", "1")
+    //                   .attr("width", "1")
+    //                   .attr("preserveAspectRatio", "none")
+    //                   .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+    //                   .attr("xlink:href", "assets/images/VOLKSWAGEN.jpg");
+    // //}
+    
+    const makeClasses = d3.map(dataset, function(d) { return d.Class; }).keys();
+    
+    const patternGradient = defs.selectAll("pattern")
+                                .data(makeClasses)
+                                .enter()
+                                .append("pattern")
+                                .attr("id", function(d) { return d+"-logo"; })
+                                .attr("height", "100%")
+                                .attr("width", "100%")
+                                .attr("patternContentUnits", "objectBoundingBox")
+                                .append("image")
+                                .attr("height", "1")
+                                .attr("width", "1")
+                                .attr("preserveAspectRatio", "none")
+                                .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
+                                .attr("xlink:href", function(d) { return `assets/images/${d.toUpperCase()}.jpg`; });
+    
+    const makes = d3.map(dataset, function(d) { return d.Make; }).keys();
     
     makes.forEach(function(make) {
         const currData = dataset.filter(function(d) { if (d.Make == make) { return d; } }); 
@@ -359,7 +376,7 @@ function makeBumpChart(dataset) {
          .on("mouseover", function(d) {
             chart.selectAll('.' + d.Class)
                  // adds the class active to the line and circles for this colour
-                 .classed('active', true);
+                 .classed('active-makes', true);
 
             const tooltip_str = "Make: " + d.Make +
                                 "<br/>" + "Year: " + d.Year +
@@ -375,7 +392,7 @@ function makeBumpChart(dataset) {
          })
          .on("mouseout", function(d) {
             chart.selectAll('.'+d.Class)
-                 .classed('active', false);
+                 .classed('active-makes', false);
 
             tooltip.style("visibility", "hidden");
          })
@@ -384,9 +401,9 @@ function makeBumpChart(dataset) {
          // the function in classed is evaluated for each element in the selection
          .on("click", function(d) {
             chart.selectAll('.' + d.Class)
-                 .classed("click-active", function(d) {
+                 .classed("click-active-makes", function(d) {
                     // toggle state
-                    return !d3.select(this).classed("click-active");
+                    return !d3.select(this).classed("click-active-makes");
                  });
          })
 }

@@ -10,46 +10,57 @@
 }
 
 .toyota {
+    fill: url(#toyota-logo);
     stroke: #808080;
 }
 
 .ford {
+    fill: url(#ford-logo);
     stroke: #808080;
 }
 
 .opel {
+    fill: url(#opel-logo);
     stroke: #808080;
 }
 
 .nissan {
+    fill: url(#nissan-logo);
     stroke: #808080;
 }
 
 .renault {
+    fill: url(#renault-logo);
     stroke: #808080;
 }
 
 .bmw {
+    fill: url(#bmw-logo);
     stroke: #808080;
 }
 
 .peugeot {
+    fill: url(#peugeot-logo);
     stroke: #808080;
 }
 
 .hyundai {
+    fill: url(#hyundai-logo);
     stroke: #808080;
 }
 
 .audi {
+    fill: url(#audi-logo);
     stroke: #808080;
 }
 
 .skoda {
+    fill: url(#skoda-logo);
     stroke: #808080;
 }
 
 .kia {
+    fill: url(#kia-logo);
     stroke: #808080;
 }
 
@@ -149,12 +160,19 @@
 }
 
 /* formatting for when user hovers over or clicks on bump chart */
+.click-active-makes,
+.active-makes {
+    opacity: 1.0;
+    stroke-opacity: 1.0;
+    z-index: 1000;
+    r: 20;
+}
+
 .click-active,
 .active {
     opacity: 1.0;
     stroke-opacity: 1.0;
     z-index: 1000;
-    r: 20;
 }
 
 path.click-active {
