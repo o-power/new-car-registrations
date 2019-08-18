@@ -49,7 +49,7 @@ function makeGraphs(unitsByYear, unitsByMakeAndYear, unitsByColourAndYear,
     makeBumpChart(unitsByMakeAndYear);
     makeModelTreemap(unitsByMakeModelAndYear.children[0]);
     colourBumpChart(unitsByColourAndYear);
-    roiMap(irelandCounties, unitsByCountyAndYear);
+    roiMap(irelandCounties, unitsByCountyAndYear.filter(function (d) { return d.Year == 2018; }));
 }
 
 /**
