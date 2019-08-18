@@ -25,10 +25,11 @@ Mobile wireframes are not included as per the project requirements: "Please note
 3. JavaScript
 4. [Bootstrap](https://getbootstrap.com/) was used to manage the layout of the site.
 5. [D3](https://d3js.org/) was used to build the charts. DC.js and Crossfilter.js were not used as it was easier to find examples for the chart types needed (treemap, bump chart, map) in D3.js.
-6. [GitHub](https://github.com/) was used for source control and deployment.
-7. [AWS Cloud](https://aws.amazon.com/cloud9/) was used as the development environment for the project.
-8. [Alteryx Designer](https://www.alteryx.com/) was used to prepare the data. Alteryx Designer is a drag-and-drop tool for rapid data preparation.
-9. [Gimp](https://www.gimp.org) was used to reduce the file size of the car logos for the bump chart.
+6. [TopoJSON](https://github.com/topojson/topojson) was used to map the counties of Ireland. It has a smaller file size than GeoJSON.
+7. [GitHub](https://github.com/) was used for source control and deployment.
+8. [AWS Cloud](https://aws.amazon.com/cloud9/) was used as the development environment for the project.
+9. [Alteryx Designer](https://www.alteryx.com/) was used to prepare the data. Alteryx Designer is a drag-and-drop tool for rapid data preparation.
+10. [Gimp](https://www.gimp.org) was used to reduce the file size of the car logos for the bump chart.
 
 ## Features
 ### Existing
@@ -91,6 +92,7 @@ To run locally, clone this repository directly into the editor of your choice by
 * New private car registrations data was taken from [beepbeep.ie](https://stats.beepbeep.ie/) [accessed 29th July 2019].
 * Used imports data was taken from [CSO Statbank table TEA01](https://www.cso.ie/px/pxeirestat/Statire/SelectVarVal/Define.asp?Maintable=TEA01&Planguage=0) [accessed 17th August 2019].
 * Census 2016 population by county was taken from [CSO Statbank E2001](https://www.cso.ie/px/pxeirestat/Statire/SelectVarVal/Define.asp?Maintable=E2001&Planguage=0) [accessed 17th August 2019].
+* The TopoJSON file for the Republic of Ireland was taken from [David Eldersveld's TopoJSON Collection](https://github.com/deldersveld/topojson) [accessed 18th August 2019]. The county Laoighis was renamed Laois to match the Census county name.
 
 ### Media
 * Car logos were taken from [stickpng.com](https://www.stickpng.com/) [accessed 16th August 2019].
