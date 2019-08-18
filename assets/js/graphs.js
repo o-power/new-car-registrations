@@ -206,22 +206,32 @@ function newVsOldStackedAreaChart(dataset) {
     const tooltip = d3.select("body")
                       .append("div")
                       .attr("class", "tooltip");
-    
-    // display tooltips on hover
+              
+    // display tooltips on mousemove
+    // for a stacked area chart we invert the mouse coordinates
+    // adapted from: http://bl.ocks.org/WillTurman/4631136
     svg.selectAll("path")
-         .on("mouseover", function(d) {
-            const tooltip_str = mygroups[d.key];
-
+        .on("mousemove", function(d) {
+            const mouseXY = d3.mouse(this);
+            
+            const mouseNearestYear = Math.round(x.invert(mouseXY[0]));
+            
+            const mouseNearestRow = d.filter(function(d) {return parseInt(d.data.key) == mouseNearestYear; });
+            
+            console.log(mouseNearestRow[0])
+            const tooltip_str = mygroups[d.key] +
+                                "<br/>" + "Year: " + mouseNearestRow[0].data.key +
+                                "<br/>" + "Units: " + (mouseNearestRow[0][1] - mouseNearestRow[0][0]);
+                                
             tooltip.html(tooltip_str)
                    .style("visibility", "visible");
-         })
-         .on("mousemove", function(d) {
+            
             tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
-                   .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
-         })
-         .on("mouseout", function(d) {
+                  .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+        })
+        .on("mouseout", function(d) {
             tooltip.style("visibility", "hidden");
-         });
+        });
                       
 }
 
@@ -306,8 +316,8 @@ function makeBumpChart(dataset) {
                                 .attr("width", "100%")
                                 .attr("patternContentUnits", "objectBoundingBox")
                                 .append("image")
-                                .attr("height", "1")
-                                .attr("width", "1")
+                                .attr("height", 1)
+                                .attr("width", 1)
                                 .attr("preserveAspectRatio", "none")
                                 .attr("xmlns:xlink", "http://www.w3.org/1999/xlink")
                                 .attr("xlink:href", function(d) { return `assets/images/${d.toUpperCase()}.jpg`; });

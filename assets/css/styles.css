@@ -156,6 +156,7 @@
     border-radius: 8px;
     pointer-events: none;
     opacity: 0.9;
+    white-space: nowrap;
     visibility: hidden;
 }
 
