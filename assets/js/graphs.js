@@ -218,7 +218,8 @@ function newVsOldStackedAreaChart(dataset) {
             
             const mouseNearestRow = d.filter(function(d) {return parseInt(d.data.key) == mouseNearestYear; });
             
-            console.log(mouseNearestRow[0])
+            //console.log(mouseNearestRow[0])
+            
             const tooltip_str = mygroups[d.key] +
                                 "<br/>" + "Year: " + mouseNearestRow[0].data.key +
                                 "<br/>" + "Units: " + (mouseNearestRow[0][1] - mouseNearestRow[0][0]);
