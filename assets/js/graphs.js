@@ -697,7 +697,7 @@ function makeModelTreemap(dataset) {
   * 
   */
 function roiMap(irelandCounties, unitsByCountyAndYear) {
-    // Adapted from: https://www.d3-graph-gallery.com/graph/backgroundmap_basic.html
+    // Adapted from: https://www.d3-graph-gallery.com/graph/choropleth_basic.html
   
     // set the dimensions and margins of the graph
     const margin = {top: 10, right: 10, bottom: 10, left: 10};
@@ -715,14 +715,14 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
                    //.attr("transform",`translate(${margin.left},${margin.top})`);
      
     // https://codepen.io/robjoeol/pen/qKReXy
-    projection = d3.geoAlbers()
+    const projection = d3.geoAlbers()
                    .scale(7307.831779290534)
                    .center([-0.6, 38.7])
                    .translate([978.8244047152583, 2145.7113504855133])
                    .rotate([0, 0, 0]);
 
     //Generate paths based on projection
-    path = d3.geoPath()
+    const path = d3.geoPath()
              .projection(projection);
     
     // https://bl.ocks.org/mbostock/4122298
@@ -732,193 +732,50 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
        .data(topojson.feature(irelandCounties, irelandCounties.objects.IRL_adm1).features)
        .enter()
        .append("path")
-       .attr("d", path);
+       .attr("d", path)
+       .attr("fill", "green");
 
-    svg.append("path")
-       .attr("class", "county-borders")
-       .attr("d", path(topojson.mesh(irelandCounties,
-                        irelandCounties.objects.IRL_adm1, function(a, b) { return a !== b; })));
+    // svg.append("path")
+    //   .attr("class", "county-borders")
+    //   .attr("d", path(topojson.mesh(irelandCounties,
+    //                     irelandCounties.objects.IRL_adm1, function(a, b) { return a !== b; })));
     
+    // {type: "GeometryCollection", geometries: Array(26)}
+    //console.log(irelandCounties.objects.IRL_adm1);
+    
+    // {arcs: Array(1), type: "Polygon", properties: {…}}
+    //console.log(irelandCounties.objects.IRL_adm1.geometries[0]);
+    
+    // Carlow
+    //console.log(irelandCounties.objects.IRL_adm1.geometries[0].properties.NAME_1);
+    
+    var labels = svg.selectAll(".label")
+                     .data(topojson.feature(irelandCounties, irelandCounties.objects.IRL_adm1).features)
+                     .enter();
+                    
+
+    labels.append("text")
+      .attr("class", "label")
+      .attr("transform", function(d) {
+        return "translate( " + path.centroid(d) + " )"
+      })
+      .text(function(d) {
+        return d.properties.NAME_1;
+      });
+    
+    // prepare the data
+    const data = d3.map();
+    
+    unitsByCountyAndYear.forEach(function (d) {
+        // new car sales per 100 adults
+        data.set(d.County, Math.round(d.Units * 1000 / d["2016 Population Over 19"]) / 10 );
+    });
+    
+    // 5.2
+    //console.log(data.get("Dublin"));
+    
+    // colour scale
+    const colourScale = d3.scaleThreshold()
+                          .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+                          .range(d3.schemeBlues[7]);
 }
-  
-// function makeGraphs11(dataset) {
-    
-//     dataset.forEach(function(d) {
-//         d.Units = parseInt(d.Units);
-//     });
-
-//     mybarplot(dataset.filter(function (d) { return d.Year == "2019"; }));
-//     mystackedareaplot(dataset);
-    
-//     // {Rank: "1", Make: "TOYOTA", Units: 21724, Year: "2008"}
-//     //console.log(dataset[0]);
-    
-//     // "1"
-//     //console.log(dataset[0].Rank);
-//     // "TOYOTA"
-//     //console.log(dataset[0].Make);
-//     // 21724
-//     //console.log(dataset[0].Units);
-//     // "2008"
-//     //console.log(dataset[0].Year);
-//     // 489
-//     //console.log(dataset.length);
-// }
-
-// function makeGraphs2(dataset) {
-    
-//     dataset.forEach(function(d) {
-//         d.Units = parseInt(d.Units);
-//         d.Rank = parseInt(d.Rank);
-//         d.Year = parseInt(d.Year);
-//     });
-    
-//     mybumpchart(dataset.filter(function (d) { return (d.Year > 2009); }));
-    
-//     // {Colour: "Grey", Units: 30023, Year: 2019, Rank: 1, Class: "grey"}
-//     //console.log(dataset[0]);
-// }
-
-// function makeGraphs3(dataset) {
-    
-//     // {children: Array(12), name: "UnitsByYearMakeModel"}
-//     //console.log(dataset);
-    
-//     // UnitsByYearMakeModel
-//     //console.log(dataset.name);
-    
-//     // {children: Array(35), name: "2019"}
-//     //console.log(dataset.children[0]);
-    
-//     // "2019"
-//     //console.log(dataset.children[0].name);
-    
-//     // {children: Array(11), name: "VOLVO"}
-//     //console.log(dataset.children[0].children[0]);
-    
-//     // "VOLVO"
-//     //console.log(dataset.children[0].children[0].name);
-    
-//     // {name: "XC60", value: 267}
-//     //console.log(dataset.children[0].children[0].children[0]);
-    
-//     // "XC60"
-//     //console.log(dataset.children[0].children[0].children[0].name);
-//     // 267
-//     //console.log(dataset.children[0].children[0].children[0].value);
-    
-//     mytreemap(dataset.children[0]);
-// }
-
-// /**
-//   * mybarplot()
-//   * 
-//   */
-// function mybarplot(dataset) {
-    
-//     // References:
-//     // https://www.d3-graph-gallery.com/graph/barplot_ordered.html
-//     // https://blog.risingstack.com/d3-js-tutorial-bar-charts-with-javascript/
-    
-//     // set the dimensions and margins of the graph
-//     const margin = {top: 30, right: 30, bottom: 70, left: 60};
-//     const width = 460 - margin.left - margin.right;
-//     const height = 400 - margin.top - margin.bottom;
-
-//     // append the svg object to the div
-//     // add margins
-//     const svg = d3.select("#mybarplot")
-//                   .append("svg")
-//                   .attr("width", width + margin.left + margin.right)
-//                   .attr("height", height + margin.top + margin.bottom)
-//                   .append("g")
-//                   .attr("transform",`translate(${margin.left},${margin.top})`);
-    
-//     // // sort data
-//     // data.sort(function(b, a) {
-//     //     return a.Value - b.Value;
-//     // });
-    
-//     // x-axis scale
-//     var xScale = d3.scaleBand()
-//                   .domain(dataset.map(function(d) { return d.Make; }))
-//                   .range([0, width])
-//                   .padding(0.2);
-    
-//     // append x-axis to the svg object
-//     // translate moves axis to bottom of chart
-//     // this means the axis is actually in the bottom margin
-//     svg.append("g")
-//       .attr("transform", `translate(0, ${height})`)
-//       .call(d3.axisBottom(xScale))
-//       .selectAll("text")
-//       .attr("transform", "translate(-10,0)rotate(-45)")
-//       .style("text-anchor", "end");
-
-//     // y-axis scale
-//     var yScale = d3.scaleLinear()
-//                   .domain([0, d3.max(dataset, function(d) { return d.Units; })])
-//                   .range([height, 0]);
-    
-//     // append y-axis to the svg object
-//     svg.append("g")
-//       .call(d3.axisLeft(yScale));
-
-//     // append the bars
-//     svg.selectAll("rect")
-//       .data(dataset)
-//       .enter()
-//       .append("rect")
-//       .attr("x", function(d) { return xScale(d.Make); })
-//       .attr("y", function(d) { return yScale(d.Units); })
-//       .attr("width", xScale.bandwidth())
-//       .attr("height", function(d) { return height - yScale(d.Units); })
-//       .attr("fill", "#69b3a2");
-    
-//     // add gridlines https://blog.risingstack.com/d3-js-tutorial-bar-charts-with-javascript/
-//     // svg.append('g')
-//     //   .attr('class', 'grid')
-//     //   .attr('transform', `translate(0, ${height})`)
-//     //   .call(d3.axisBottom()
-//     //   .scale(xScale)
-//     //   .tickSize(-height, 0, 0)
-//     //   .tickFormat(''))
-    
-//     svg.append('g')
-//       .attr('class', 'grid')
-//       .call(d3.axisLeft()
-//       .scale(yScale)
-//       .tickSize(-width, 0, 0)
-//       .tickFormat(''));
-       
-//     // add y label
-//     svg.append('text')
-//       .attr('x', -height/2)
-//       .attr('y', -margin.left/2)
-//       .attr('transform', 'rotate(-90)')
-//       .attr('text-anchor', 'middle')
-//       .text('Units');
-    
-//     // add title
-//     svg.append('text')
-//       .attr('x', width / 2 + margin.left)
-//       .attr('y', margin.top/2)
-//       .attr('text-anchor', 'middle')
-//       .text('Car makes by units (2019)');
-    
-//     // add interactivity
-//     svg.selectAll("rect")
-//       .on('mouseenter', function (actual, i) {
-//           console.log(this);
-//           d3.select(this).attr('opacity', 0.5);
-//       })
-//       .on('mouseleave', function (actual, i) {
-//           d3.select(this).attr('opacity', 1);
-//       });
-    
-//     // add colors and fonts
-    
-    
-//     // https://blog.risingstack.com/tutorial-d3-js-calendar-heatmap/
-//     // https://jsfiddle.net/matehu/w7h81xz2/
-// }
