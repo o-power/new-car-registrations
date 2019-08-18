@@ -638,26 +638,14 @@ function makeModelTreemap(dataset) {
                    .sum(function(d) { return d.value; })
                    .sort(function(a, b) { return b.value - a.value; });
     
-    console.log(root.leaves());
+    //console.log(root.leaves());
     
     // Then d3.treemap computes the position of each element of the hierarchy
     d3.treemap()
       .size([width, height])
-      //.paddingTop(28)
-      //.paddingRight(7)
-      .paddingInner(3)      // Padding between each rectangle
-      .paddingOuter(1)
-      //.padding(20)
+      .paddingInner(3)  // Padding between each rectangle
+      .paddingOuter(1) // Extra padding between car makes
       (root);
-      
-    // scales
-    // https://www.d3-graph-gallery.com/graph/custom_axis.html
-
-    // prepare a color scale
-    // One color per group, opacity proportional to value: classic use of scale
-    // const color = d3.scaleOrdinal()
-    //                 .domain(["VOLVO","VOLKSWAGEN","OTHER","NISSAN"])
-    //                 .range([ "#402D54","#0000FF","#FF6600","#00FF00"]);
 
     // And a opacity scale
     const opacity = d3.scaleLinear()
@@ -673,8 +661,9 @@ function makeModelTreemap(dataset) {
        .attr('y', function (d) { return d.y0; })
        .attr('width', function (d) { return d.x1 - d.x0; })
        .attr('height', function (d) { return d.y1 - d.y0; })
-       .style("stroke", "black")
-       //.style("fill", function(d) { return color(d.parent.data.name); } )
+       .attr("class", function(d) { 
+           return d.parent.data.name.toLowerCase().replace(/ /g, '-') + "-square";
+       })
        .style("opacity", function(d) { return opacity(d.data.value); });
     
      // tooltips
@@ -685,10 +674,6 @@ function makeModelTreemap(dataset) {
     // interactivity
     svg.selectAll("rect")
          .on("mouseover", function(d) {
-            //chart.selectAll('.' + d.Class)
-            //      // adds the class active to the line and circles for this colour
-            //      .classed('active', true);
-
             const tooltip_str = "Year: " + d.parent.parent.data.name +
                                 "<br/>" + "Make: " + d.parent.data.name +
                                 "<br/>" + "Model: " + d.data.name +
@@ -702,55 +687,9 @@ function makeModelTreemap(dataset) {
                    .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
          })
          .on("mouseout", function(d) {
-            //chart.selectAll('.'+d.Class)
-            //     .classed('active', false);
-
             tooltip.style("visibility", "hidden");
          });
          
-    // and to add the text labels
-    // svg.selectAll("text")
-    //   .data(root.leaves())
-    //   .enter()
-    //   .append("text")
-    //   .attr("x", function(d){ return d.x0+5; })    // +10 to adjust position (more right)
-    //   .attr("y", function(d){ return d.y0+20; })    // +20 to adjust position (lower)
-    //   .text(function(d) { return d.data.name; })
-    //   .attr("font-size", "12px")
-    //   .attr("fill", "white");
-
-    // and to add the text labels
-    // svg.selectAll("vals")
-    //   .data(root.leaves())
-    //   .enter()
-    //   .append("text")
-    //   .attr("x", function(d){ return d.x0+5; })    // +10 to adjust position (more right)
-    //   .attr("y", function(d){ return d.y0+35; })    // +20 to adjust position (lower)
-    //   .text(function(d){ return d.data.value; })
-    //   .attr("font-size", "11px")
-    //   .attr("fill", "white")
-
-    // Add title for the 3 groups
-//    svg.selectAll("titles")
- //      .data(root.descendants().filter(function(d){return d.depth==1}))
-//       .enter()
-//     .append("text")
-//       .attr("x", function(d){ return d.x0})
-//       .attr("y", function(d){ return d.y0+21})
-//       .text(function(d){ return d.data.name })
-//       .attr("font-size", "19px")
-//       .attr("fill",  function(d){ return color(d.data.name)} )
-
-//   // Add title for the 3 groups
-//   svg
-//     .append("text")
-//       .attr("x", 0)
-//       .attr("y", 14)    // +20 to adjust position (lower)
-//       .text("Three group leaders and 14 employees")
-//       .attr("font-size", "19px")
-//       .attr("fill",  "grey" )
-
-// })
 }
   
 /**

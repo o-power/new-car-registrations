@@ -1,4 +1,60 @@
-/* class for each car make */
+/* class for each car make in treemap */
+.volkswagen-square {
+    fill: #003B73;
+    stroke: #003B73;
+}
+
+.toyota-square {
+    fill: #E50000;
+    stroke: #E50000;
+}
+
+.ford-square {
+    fill: #003376;
+    stroke: #003376;
+}
+
+.opel-square {
+    fill: #F7D900;
+    stroke: #F7D900;
+}
+
+.nissan-square {
+    fill: #C3092F;
+    stroke: #C3092F;
+}
+
+.renault-square {
+    fill: #FFCE00;
+    stroke: #FFCE00;
+}
+
+.peugeot-square {
+    fill: #162133;
+    stroke: #162133;
+}
+
+.hyundai-square {
+    fill: #003469;
+    stroke: #003469;
+}
+
+.audi-square {
+    fill: #4C4C4C;
+    stroke: #4C4C4C;
+}
+
+.skoda-square {
+    fill: #4BA82E;
+    stroke: #4BA82E;
+}
+
+.kia-square {
+    fill: #E61028;
+    stroke: #E61028;
+}
+
+/* class for each car make in bump chart */
 .volkswagen {
     fill: url(#volkswagen-logo);
     stroke: #003B73;
@@ -59,7 +115,7 @@
     stroke: #E61028;
 }
 
-/* class for each car colour */
+/* class for each car colour in bump chart */
 .grey {
     fill: #808080;
     stroke: #808080;
