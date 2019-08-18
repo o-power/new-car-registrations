@@ -6,10 +6,11 @@ Promise.all([
     d3.csv("assets/data/UnitsByYear.csv"),
     d3.csv("assets/data/UnitsByMakeAndYear.csv"),
     d3.csv("assets/data/UnitsByColourAndYear.csv"),
-    d3.json("assets/data/UnitsByMakeModelAndYear.json"),
-    d3.json("assets/data/IrelandCounties.json")
+    d3.json("assets/data/UnitsByMakeModel2018.json"),
+    d3.json("assets/data/IrelandCounties.json"),
+    d3.csv("assets/data/UnitsByCountyAndYear.csv")
 ]).then(function(files) {
-    makeGraphs(files[0], files[1], files[2], files[3], files[4]);
+    makeGraphs(files[0], files[1], files[2], files[3], files[4], files[5]);
 }).catch(function(err) {
     console.log(err);
 });
@@ -18,7 +19,8 @@ Promise.all([
   * makeGraphs()
   * 
   */
-function makeGraphs(unitsByYear, unitsByMakeAndYear, unitsByColourAndYear, unitsByMakeModelAndYear, irelandCounties) {
+function makeGraphs(unitsByYear, unitsByMakeAndYear, unitsByColourAndYear,
+    unitsByMakeModelAndYear, irelandCounties, unitsByCountyAndYear) {
     
     unitsByYear.forEach(function(d) {
         d.Units = parseInt(d.Units);
@@ -37,11 +39,17 @@ function makeGraphs(unitsByYear, unitsByMakeAndYear, unitsByColourAndYear, units
         d.Year = parseInt(d.Year);
     });
     
+    unitsByCountyAndYear.forEach(function(d) {
+        d.Units = parseInt(d.Units);
+        d["2016 Population Over 19"] = parseInt(d["2016 Population Over 19"]);
+        d.Year = parseInt(d.Year);
+    });
+    
     newVsOldStackedAreaChart(unitsByYear);
     makeBumpChart(unitsByMakeAndYear);
     makeModelTreemap(unitsByMakeModelAndYear.children[0]);
     colourBumpChart(unitsByColourAndYear);
-    roiMap(irelandCounties);
+    roiMap(irelandCounties, unitsByCountyAndYear);
 }
 
 /**
@@ -722,7 +730,7 @@ function makeModelTreemap(dataset) {
   * roiMap()
   * 
   */
-function roiMap(dataset) {
+function roiMap(irelandCounties, unitsByCountyAndYear) {
     // Adapted from: https://www.d3-graph-gallery.com/graph/backgroundmap_basic.html
   
     // set the dimensions and margins of the graph
@@ -742,37 +750,29 @@ function roiMap(dataset) {
      
     // https://codepen.io/robjoeol/pen/qKReXy
     projection = d3.geoAlbers()
-      .scale(7307.831779290534)
-      .center([-0.6, 38.7])
-      .translate([978.8244047152583, 2145.7113504855133])
-      .rotate([0, 0, 0]);
+                   .scale(7307.831779290534)
+                   .center([-0.6, 38.7])
+                   .translate([978.8244047152583, 2145.7113504855133])
+                   .rotate([0, 0, 0]);
 
     //Generate paths based on projection
-    path = d3.geoPath().projection(projection);
-    
-    // svg.append("path")
-    //     .datum(topojson.mesh(dataset,dataset.objects.IRL_adm1))
-    //   .attr("d", path)
-    //   .attr("class", "country");
+    path = d3.geoPath()
+             .projection(projection);
     
     // https://bl.ocks.org/mbostock/4122298
     svg.append("g")
-      .attr("class", "counties")
-    .selectAll("path")
-    .data(topojson.feature(dataset, dataset.objects.IRL_adm1).features)
-    .enter().append("path")
-      .attr("d", path);
+       .attr("class", "counties")
+       .selectAll("path")
+       .data(topojson.feature(irelandCounties, irelandCounties.objects.IRL_adm1).features)
+       .enter()
+       .append("path")
+       .attr("d", path);
 
-  svg.append("path")
-      .attr("class", "county-borders")
-      .attr("d", path(topojson.mesh(dataset, dataset.objects.IRL_adm1, function(a, b) { return a !== b; })));
-      
-    //  var places = svg.selectAll(".city")
-    //   .data(topojson.feature(json, json.objects.places).features).enter();
-
-    // places.append("path")
-    //   .attr("class", "city")
-    //   .attr("d", path);
+    svg.append("path")
+       .attr("class", "county-borders")
+       .attr("d", path(topojson.mesh(irelandCounties,
+                        irelandCounties.objects.IRL_adm1, function(a, b) { return a !== b; })));
+    
 }
   
 // function makeGraphs11(dataset) {
