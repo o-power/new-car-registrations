@@ -608,7 +608,7 @@ function colourBumpChart(dataset) {
                     // toggle state
                     return !d3.select(this).classed("click-active");
                  });
-         })
+         });
 }
 
 /**
@@ -633,11 +633,12 @@ function makeModelTreemap(dataset) {
                   .attr("transform",`translate(${margin.left},${margin.top})`);
 
     // Give the data to this cluster layout
-    // Here the size of each leave is given in the 'value' field in input data
+    // Here the size of each leaf is given in the 'value' field in input data
     const root = d3.hierarchy(dataset)
-                   .sum(function(d) { return d.value; });
+                   .sum(function(d) { return d.value; })
+                   .sort(function(a, b) { return b.value - a.value; });
     
-    //console.log(root.leaves());
+    console.log(root.leaves());
     
     // Then d3.treemap computes the position of each element of the hierarchy
     d3.treemap()
@@ -645,7 +646,7 @@ function makeModelTreemap(dataset) {
       //.paddingTop(28)
       //.paddingRight(7)
       .paddingInner(3)      // Padding between each rectangle
-      //.paddingOuter(6)
+      .paddingOuter(1)
       //.padding(20)
       (root);
       
@@ -654,19 +655,14 @@ function makeModelTreemap(dataset) {
 
     // prepare a color scale
     // One color per group, opacity proportional to value: classic use of scale
-    const color = d3.scaleOrdinal()
-                    .domain(["VOLVO","VOLKSWAGEN","OTHER","NISSAN"])
-                    .range([ "#402D54","#0000FF","#FF6600","#00FF00"]);
+    // const color = d3.scaleOrdinal()
+    //                 .domain(["VOLVO","VOLKSWAGEN","OTHER","NISSAN"])
+    //                 .range([ "#402D54","#0000FF","#FF6600","#00FF00"]);
 
     // And a opacity scale
     const opacity = d3.scaleLinear()
-                    .domain(d3.extent(dataset.children.map(function(child) { 
-                      return +child.value;
-                    })))
-                    .range([.5,1]);
-
-    
-    console.log(root.leaves());
+                      .domain([0, 5000])
+                      .range([.5,1]);
     
     // use this information to add rectangles:
     svg.selectAll("rect")
@@ -678,9 +674,40 @@ function makeModelTreemap(dataset) {
        .attr('width', function (d) { return d.x1 - d.x0; })
        .attr('height', function (d) { return d.y1 - d.y0; })
        .style("stroke", "black")
-       .style("fill", function(d) { return color(d.parent.name); } )
+       //.style("fill", function(d) { return color(d.parent.data.name); } )
        .style("opacity", function(d) { return opacity(d.data.value); });
+    
+     // tooltips
+    const tooltip = d3.select("body")
+                      .append("div")
+                      .attr("class", "tooltip");
+    
+    // interactivity
+    svg.selectAll("rect")
+         .on("mouseover", function(d) {
+            //chart.selectAll('.' + d.Class)
+            //      // adds the class active to the line and circles for this colour
+            //      .classed('active', true);
 
+            const tooltip_str = "Year: " + d.parent.parent.data.name +
+                                "<br/>" + "Make: " + d.parent.data.name +
+                                "<br/>" + "Model: " + d.data.name +
+                                "<br/>" + "Units: " + d.data.value;
+            
+            tooltip.html(tooltip_str)
+                   .style("visibility", "visible");
+         })
+         .on("mousemove", function(d) {
+            tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
+                   .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+         })
+         .on("mouseout", function(d) {
+            //chart.selectAll('.'+d.Class)
+            //     .classed('active', false);
+
+            tooltip.style("visibility", "hidden");
+         });
+         
     // and to add the text labels
     // svg.selectAll("text")
     //   .data(root.leaves())
