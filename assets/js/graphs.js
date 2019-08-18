@@ -713,7 +713,23 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
                    .attr("height", 800)
                    .append("g")
                    //.attr("transform",`translate(${margin.left},${margin.top})`);
-     
+    
+    // prepare the data
+    const data = d3.map();
+    
+    unitsByCountyAndYear.forEach(function (d) {
+        // new car sales per 100 adults
+        data.set(d.County, Math.round(d.Units * 1000 / d["2016 Population Over 19"]) / 10 );
+    });
+    
+    // 5.2
+    //console.log(data.get("Dublin"));
+    
+    // colour scale
+    const colourScale = d3.scaleThreshold()
+                          .domain([1, 2, 3, 4, 5, 6])
+                          .range(d3.schemeGreens[7]);
+                          
     // https://codepen.io/robjoeol/pen/qKReXy
     const projection = d3.geoAlbers()
                    .scale(7307.831779290534)
@@ -733,12 +749,8 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
        .enter()
        .append("path")
        .attr("d", path)
-       .attr("fill", "green");
-
-    // svg.append("path")
-    //   .attr("class", "county-borders")
-    //   .attr("d", path(topojson.mesh(irelandCounties,
-    //                     irelandCounties.objects.IRL_adm1, function(a, b) { return a !== b; })));
+       .attr("fill", function (d) { return colourScale(data.get(d.properties.NAME_1)); })
+       .attr("stroke", "#808080");
     
     // {type: "GeometryCollection", geometries: Array(26)}
     //console.log(irelandCounties.objects.IRL_adm1);
@@ -749,33 +761,46 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
     // Carlow
     //console.log(irelandCounties.objects.IRL_adm1.geometries[0].properties.NAME_1);
     
-    var labels = svg.selectAll(".label")
-                     .data(topojson.feature(irelandCounties, irelandCounties.objects.IRL_adm1).features)
-                     .enter();
-                    
-
+    // add labels for the new car sales per 100 adults
+    const labels = svg.selectAll("text")
+                      .data(topojson.feature(irelandCounties, irelandCounties.objects.IRL_adm1).features)
+                      .enter();
+    
+    // https://codepen.io/robjoeol/pen/qKReXy
     labels.append("text")
-      .attr("class", "label")
-      .attr("transform", function(d) {
-        return "translate( " + path.centroid(d) + " )"
-      })
-      .text(function(d) {
-        return d.properties.NAME_1;
-      });
+          .attr("class", "label")
+          .attr("transform", function(d) {
+                return "translate( " + path.centroid(d) + " )"
+          })
+          .text(function(d) {
+                return data.get(d.properties.NAME_1);
+          })
+          .attr("text-anchor", "middle");
     
-    // prepare the data
-    const data = d3.map();
+    // tooltips
+    const tooltip = d3.select("body")
+                      .append("div")
+                      .attr("class", "tooltip");
     
-    unitsByCountyAndYear.forEach(function (d) {
-        // new car sales per 100 adults
-        data.set(d.County, Math.round(d.Units * 1000 / d["2016 Population Over 19"]) / 10 );
-    });
-    
-    // 5.2
-    //console.log(data.get("Dublin"));
-    
-    // colour scale
-    const colourScale = d3.scaleThreshold()
-                          .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-                          .range(d3.schemeBlues[7]);
+    // interactivity
+    svg.selectAll("path")
+        .on("mouseover", function(d) {
+            // const tooltip_str = "Year: " + d.parent.parent.data.name +
+            //                     "<br/>" + "Make: " + d.parent.data.name +
+            //                     "<br/>" + "Model: " + d.data.name +
+            //                     "<br/>" + "Units: " + d.data.value;
+            const tooltip_str = "hello";
+            console.log(d.properties.NAME_1);
+            
+            tooltip.html(tooltip_str)
+                   .style("visibility", "visible");
+         })
+         .on("mousemove", function(d) {
+            tooltip.style("top", d3.event.pageY - (tooltip.node().clientHeight + 5) + "px")
+                   .style("left", d3.event.pageX - (tooltip.node().clientWidth / 2.0) + "px");
+         })
+         .on("mouseout", function(d) {
+            tooltip.style("visibility", "hidden");
+         });
+         
 }
