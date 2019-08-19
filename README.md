@@ -35,6 +35,7 @@ Mobile wireframes are not included as per the project requirements: "Please note
 11. [Material Icons](https://material.io/resources/icons/?style=baseline) were used in the Data Sources section as bullet icons.
 
 ## Features
+### Existing
 * A stacked chart with a custom legend.
 * Bump charts which are a combination of a line chart and circles.
 * SVG patterns which are used to display the car logos in the car makes bump chart.
@@ -45,11 +46,10 @@ Mobile wireframes are not included as per the project requirements: "Please note
 * A data sources section which uses Material Icons.
 * A shortcut icon.
 
-### Existing
 ### Future
 * The functions which build the charts could be made more generic and so reusable.
-
 * The charts could be made responsive by using the [viewBox attribute](https://medium.com/@louisemoxy/a-simple-way-to-make-d3-js-charts-svgs-responsive-7afb04bc2e4b).
+* Additional charts could be added to examine the trends in body type (MPV, hatchback etc) and engine type (electric, petrol etc).
 
 ## Data Preparation
 Data for each year was downloaded separately from [beepbeep.ie](https://stats.beepbeep.ie/). Alteryx Designer was used to combine and clean the data. For the car colours data the multi-coloured category was substituted for any colour category containing the word "and".
