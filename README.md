@@ -52,7 +52,7 @@ Mobile wireframes are not included as per the project requirements: "Please note
 * Additional charts could be added to examine the trends in body type (MPV, hatchback etc) and engine type (electric, petrol etc).
 
 ## Data Preparation
-Data for each year was downloaded separately from [beepbeep.ie](https://stats.beepbeep.ie/). Alteryx Designer was used to combine and clean the data. For the car colours data the multi-coloured category was substituted for any colour category containing the word "and".
+Data for each year was downloaded separately from [stats.beepbeep.ie](https://stats.beepbeep.ie/). Alteryx Designer was used to combine and clean the data. For the car colours data the multi-coloured category was substituted for any colour category containing the word "and".
 
 The treemap required the data to be in a JSON format with the necessary hierarchial structure. Alteryx Designer was used to build this hierarchy and to convert the data from CSV to JSON.
 
@@ -64,7 +64,7 @@ The HTML was checked using the [W3C Markup Validation Service](https://validator
 
 The CSS was checked using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/). This returned one error which said the property "r" does not exist. However, "r" is a property of the circle svg.
 
-The website was tested on Chrome and Firefox. As the project requirments do not require a data dashboard to be responsive, the website was only tested to load on mobile devices and not to be responsive.
+The website was tested on Chrome and Firefox. As the project requirements do not require a data dashboard to be responsive, the website was only tested to load on mobile devices and not to be responsive.
 
 The links in the Data Sources section were checked to ensure they were working and opening in new tabs.
 
