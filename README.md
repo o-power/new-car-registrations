@@ -57,6 +57,8 @@ Data for each year was downloaded separately from [beepbeep.ie](https://stats.be
 The treemap required the data to be in a JSON format with the necessary hierarchial structure. Alteryx Designer was used to build this hierarchy and to convert the data from CSV to JSON.
 
 ## Testing
+During development, the Chrome DevTools console was used regularly to log the data to ensure that it was being manipulated correctly by the D3.js functions.
+
 The HTML was checked using the W3C Markup Validation Service.
 
 The CSS was checked using the W3C CSS Validation Service.
