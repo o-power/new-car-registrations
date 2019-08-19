@@ -35,6 +35,16 @@ Mobile wireframes are not included as per the project requirements: "Please note
 11. [Material Icons](https://material.io/resources/icons/?style=baseline) were used in the Data Sources section as bullet icons.
 
 ## Features
+* A stacked chart with a custom legend.
+* Bump charts which are a combination of a line chart and circles.
+* SVG patterns which are used to display the car logos in the car makes bump chart.
+* An SVG linear gradient which is used to display a multi-coloured circle in the car colours bump chart.
+* A treemap which is an example of a D3.js hierarchy chart. The data was prepared in JSON format for the chart.
+* A map of Ireland which is an example of a TopoJSON chart.
+* Tooltips on all the charts which allow the user to explore the data.
+* A data sources section which uses Material Icons.
+* A shortcut icon.
+
 ### Existing
 ### Future
 * The functions which build the charts could be made more generic and so reusable.
