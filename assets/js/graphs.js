@@ -60,8 +60,8 @@ function newVsOldStackedAreaChart(dataset) {
     // adapted from: https://www.d3-graph-gallery.com/graph/stackedarea_basic.html
     
     const margin = {top: 30, right: 30, bottom: 50, left: 70};
-    const width = 600 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const width = 700 - margin.left - margin.right;
+    const height = 350 - margin.top - margin.bottom;
 
     const svg = d3.select("#new-vs-old-stacked-area-chart")
                   .append("svg")
@@ -623,8 +623,8 @@ function makeModelTreemap(dataset) {
 
     // set the dimensions and margins of the graph
     const margin = {top: 10, right: 10, bottom: 10, left: 10};
-    const width = 445 - margin.left - margin.right;
-    const height = 445 - margin.top - margin.bottom;
+    const width = 960 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     const svg = d3.select("#make-model-treemap")

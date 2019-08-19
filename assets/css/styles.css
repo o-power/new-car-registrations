@@ -11,6 +11,9 @@ h2 {
     border-bottom: 3px solid rgba(0,0,0,1);
 }
 
+.chart-container {
+    margin-bottom: 40px;
+}
 /* class for each car make in treemap */
 .volkswagen-square {
     fill: #003B73;
