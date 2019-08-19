@@ -417,7 +417,7 @@ function makeBumpChart(dataset) {
                     // toggle state
                     return !d3.select(this).classed("click-active-makes");
                  });
-         })
+         });
 }
   
 /**

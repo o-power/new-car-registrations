@@ -57,23 +57,19 @@ Data for each year was downloaded separately from [beepbeep.ie](https://stats.be
 The treemap required the data to be in a JSON format with the necessary hierarchial structure. Alteryx Designer was used to build this hierarchy and to convert the data from CSV to JSON.
 
 ## Testing
-During development, the Chrome DevTools console was used regularly to log the data to ensure that it was being manipulated correctly by the D3.js functions.
+### General Testing
+During development, the Chrome DevTools console was used regularly to log the data to ensure that it was being correctly manipulated by the D3.js functions.
 
-The HTML was checked using the W3C Markup Validation Service.
+The HTML was checked using the [W3C Markup Validation Service](https://validator.w3.org/). This identified an incorrectly used paragraph element.
 
-The CSS was checked using the W3C CSS Validation Service.
+The CSS was checked using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/). This returned one error which said the property "r" does not exist. However, "r" is a property of the circle svg.
 
-The website was tested during development on different screen sizes and devices using Chrome DevTools. The website was also tested on a Samsung A5, a 15 inch laptop and a widescreen monitor.
+The website was tested on Chrome and Firefox. As the project requirments do not require a data dashboard to be responsive, the website was only tested to load on mobile devices and not to be responsive.
 
-JavaScript Validation Service.
+The links in the Data Sources section were checked to ensure they were working and opening in new tabs.
 
-Different browsers.
+The data was checked against the tables in [stats.beepbeep.ie](https://stats.beepbeep.ie/).
 
-All the links were checked to ensure they were working.
-
-Bugs and fixes.
-
-Was not required to be responsive.
 ### User Story Testing
 * _I want to understand the trend in total new car registrations in Ireland._
   The stacked area chart shows the trend in total new car registrations in Ireland. It also shows how the downward trend in recent years may be attributed to the increase in used car imports.
@@ -104,7 +100,7 @@ To run locally, clone this repository directly into the editor of your choice by
 
 ## Credits
 ### Content
-* New private car registrations data was taken from [beepbeep.ie](https://stats.beepbeep.ie/) [accessed 29th July 2019].
+* New private car registrations data was taken from [stats.beepbeep.ie](https://stats.beepbeep.ie/) [accessed 29th July 2019].
 * Used imports data was taken from [CSO Statbank table TEA01](https://www.cso.ie/px/pxeirestat/Statire/SelectVarVal/Define.asp?Maintable=TEA01&Planguage=0) [accessed 17th August 2019].
 * Census 2016 population by county was taken from [CSO Statbank E2001](https://www.cso.ie/px/pxeirestat/Statire/SelectVarVal/Define.asp?Maintable=E2001&Planguage=0) [accessed 17th August 2019].
 * The TopoJSON file for the Republic of Ireland was taken from [David Eldersveld's TopoJSON Collection](https://github.com/deldersveld/topojson) [accessed 18th August 2019]. The county Laoighis was renamed Laois to match the Census county name.
