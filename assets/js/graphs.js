@@ -59,7 +59,7 @@ function makeGraphs(unitsByYear, unitsByMakeAndYear, unitsByColourAndYear,
 function newVsOldStackedAreaChart(dataset) {
     // adapted from: https://www.d3-graph-gallery.com/graph/stackedarea_basic.html
     
-    const margin = {top: 30, right: 30, bottom: 50, left: 70};
+    const margin = {top: 30, right: 30, bottom: 50, left: 90};
     const width = 700 - margin.left - margin.right;
     const height = 350 - margin.top - margin.bottom;
 
@@ -121,6 +121,7 @@ function newVsOldStackedAreaChart(dataset) {
                     
     
     svg.append("g")
+       .attr("class", "x axis")
        .attr("transform", "translate(0," + height + ")")
        .call(xAxis);
     
@@ -146,6 +147,7 @@ function newVsOldStackedAreaChart(dataset) {
     const yAxis = d3.axisLeft(y);
     
     svg.append("g")
+       .attr("class", "y axis")
        .call(yAxis);
     
     // y axis label
@@ -153,14 +155,14 @@ function newVsOldStackedAreaChart(dataset) {
          .text("Number cars")
          .attr("text-anchor", "middle")
          .attr("class", "axis-label")
-         .attr("y", -55)
+         .attr("y", -70)
          .attr("x", height / -2.0)
          .attr("transform", "rotate(-90)");
     
     // colours
     const color = d3.scaleOrdinal()
                     .domain(mygroups)
-                    .range(["#377eb8","#e41a1c"])
+                    .range(["#F7D900","#162133"])
     
     // 0
     //console.log(stackedData[0].key)
@@ -194,21 +196,21 @@ function newVsOldStackedAreaChart(dataset) {
        .style("fill", color(mygroups[1]));
     svg.append("circle")
        .attr("cx", (width / 4.0))
-       .attr("cy", 10 + 20)
+       .attr("cy", 10 + 25)
        .attr("r", 6)
        .style("fill", color(mygroups[0]));
     svg.append("text")
        .attr("x", (width / 4.0) + 20)
        .attr("y", 10)
        .text(mygroups[1])
-       .style("font-size", "12px")
+       .style("font-size", "14px")
        .style("font-family", "sans-serif")
        .attr("alignment-baseline","middle");
     svg.append("text")
        .attr("x", (width / 4.0) + 20)
-       .attr("y", 10 + 20)
+       .attr("y", 10 + 25)
        .text(mygroups[0])
-       .style("font-size", "12px")
+       .style("font-size", "14px")
        .style("font-family", "sans-serif")
        .attr("alignment-baseline","middle");
        
@@ -702,19 +704,15 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
     // Adapted from: https://www.d3-graph-gallery.com/graph/choropleth_basic.html
   
     // set the dimensions and margins of the graph
-    const margin = {top: 10, right: 10, bottom: 10, left: 10};
-    const width = 800 - margin.left - margin.right;
-    const height = 800 - margin.top - margin.bottom;
+    const width = 600;
+    const height = 600;
 
     // append the svg object to the body of the page
     const svg = d3.select("#roi-map")
                   .append("svg")
-                   //.attr("width", width + margin.left + margin.right)
-                   //.attr("height", height + margin.top + margin.bottom)
                    .attr("width", 600)
                    .attr("height", 600)
-                   .append("g")
-                   //.attr("transform",`translate(${margin.left},${margin.top})`);
+                   .append("g");
     
     // prepare the data
     const data = d3.map();

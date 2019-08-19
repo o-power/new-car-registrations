@@ -231,7 +231,7 @@ a {
 .tooltip {
     position: absolute;
     padding: 10px;
-    font: 12px sans-serif;
+    font: 14px sans-serif;
     background: #222;
     color: #fff;
     border: 0px;
@@ -268,7 +268,7 @@ path.active {
 
 /* format the numbers on the x and y axis */
 .axis text {
-    font: 12px sans-serif;
+    font: 14px sans-serif;
 }
 
 /* format the axis itself and the ticks */
@@ -285,9 +285,9 @@ path.active {
 }
 
 .axis-label{
-    font: 12px sans-serif;
+    font: 14px sans-serif;
 }
 
 .x.axis {
-    font: 12px sans-serif;
+    font: 14px sans-serif;
 }
