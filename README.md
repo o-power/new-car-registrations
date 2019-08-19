@@ -8,7 +8,7 @@ The deployed site can be found [here](https://o-power.github.io/new-car-registra
 
 ## UX
 ### Wireframes
-Desktop wireframes can be found in the [wireframes](https://github.com/o-power/new-car-registrations/tree/master/assets/wireframes) folder.
+Desktop wireframes can be found in the [wireframes](/assets/wireframes) folder.
 
 Mobile wireframes are not included as per the project requirements: "Please note that if you are building a data dashboard, only your chart containers are expected to be responsive. Charts using D3.js are not responsive as they are designed for desktop or large-screen viewing."
 
