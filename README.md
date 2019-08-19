@@ -6,6 +6,8 @@ Topics explored include: (1) new car sales vs used imports, (2) the popularity r
 ## Demo
 The deployed site can be found [here](https://o-power.github.io/new-car-registrations/) on GitHub Pages.
 
+<img src="/assets/images/deployed_site_screenshot.png" alt="Image of deployed site">
+
 ## UX
 ### Wireframes
 Desktop wireframes can be found in the [wireframes](/assets/wireframes) folder.
