@@ -710,9 +710,8 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
     // append the svg object to the body of the page
     const svg = d3.select("#roi-map")
                   .append("svg")
-                   .attr("width", 600)
-                   .attr("height", 600)
-                   .append("g");
+                  .attr("width", 600)
+                  .attr("height", 600);
     
     // prepare the data
     const data = d3.map();
@@ -732,9 +731,9 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
                           
     // https://codepen.io/robjoeol/pen/qKReXy
     const projection = d3.geoAlbers()
-                   .scale(7307.831779290534)
+                   .scale(7310)
                    .center([-0.6, 38.7])
-                   .translate([978.8244047152583, 2145.7113504855133])
+                   .translate([900, 2200])
                    .rotate([0, 0, 0]);
 
     //Generate paths based on projection
