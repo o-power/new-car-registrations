@@ -1,3 +1,16 @@
+h1 {
+    text-transform: uppercase;
+    text-align: center;
+    margin: 1em;
+}
+
+h2 {
+    text-transform: uppercase;
+    padding: 0px 0px 8px;
+    margin: 0px 0px 16px;
+    border-bottom: 3px solid rgba(0,0,0,1);
+}
+
 /* class for each car make in treemap */
 .volkswagen-square {
     fill: #003B73;
@@ -237,7 +250,7 @@ path.active {
 
 /* format the numbers on the x and y axis */
 .axis text {
-    font: 10px sans-serif;
+    font: 12px sans-serif;
 }
 
 /* format the axis itself and the ticks */
@@ -251,4 +264,12 @@ path.active {
 /* remove the x axis */
 .x.axis path {
     display: none;
+}
+
+.axis-label{
+    font: 12px sans-serif;
+}
+
+.x.axis {
+    font: 12px sans-serif;
 }

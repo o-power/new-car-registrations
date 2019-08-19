@@ -128,7 +128,7 @@ function newVsOldStackedAreaChart(dataset) {
     svg.append("text")
        .text("Year of registration")
        .attr("text-anchor", "middle")
-       //.attr("class", "graph-title")
+       .attr("class", "axis-label")
        .attr("y", height + 40)
        .attr("x", width / 2.0);
     
@@ -152,7 +152,7 @@ function newVsOldStackedAreaChart(dataset) {
     svg.append("text")
          .text("Number cars")
          .attr("text-anchor", "middle")
-         //.attr("class", "axes-labels")
+         .attr("class", "axis-label")
          .attr("y", -55)
          .attr("x", height / -2.0)
          .attr("transform", "rotate(-90)");
@@ -194,20 +194,22 @@ function newVsOldStackedAreaChart(dataset) {
        .style("fill", color(mygroups[1]));
     svg.append("circle")
        .attr("cx", (width / 4.0))
-       .attr("cy", 10 + 30)
+       .attr("cy", 10 + 20)
        .attr("r", 6)
        .style("fill", color(mygroups[0]));
     svg.append("text")
        .attr("x", (width / 4.0) + 20)
        .attr("y", 10)
        .text(mygroups[1])
-       .style("font-size", "15px")
+       .style("font-size", "12px")
+       .style("font-family", "sans-serif")
        .attr("alignment-baseline","middle");
     svg.append("text")
        .attr("x", (width / 4.0) + 20)
-       .attr("y", 10 + 30)
+       .attr("y", 10 + 20)
        .text(mygroups[0])
-       .style("font-size", "15px")
+       .style("font-size", "12px")
+       .style("font-family", "sans-serif")
        .attr("alignment-baseline","middle");
        
     // tooltip
@@ -311,7 +313,7 @@ function makeBumpChart(dataset) {
     chart.append("text")
          .text("Rank")
          .attr("text-anchor", "middle")
-         .attr("class", "graph-title")
+         .attr("class", "axis-label")
          .attr("y", -35)
          .attr("x", height / -2.0)
          .attr("transform", "rotate(-90)");
@@ -483,7 +485,7 @@ function colourBumpChart(dataset) {
     chart.append("text")
          .text("Rank")
          .attr("text-anchor", "middle")
-         .attr("class", "graph-title")
+         .attr("class", "axis-label")
          .attr("y", -35)
          .attr("x", height / -2.0)
          .attr("transform", "rotate(-90)");
@@ -612,7 +614,7 @@ function colourBumpChart(dataset) {
 }
 
 /**
-  * makeModelTreeemap()
+  * makeModelTreemap()
   * 
   */
 function makeModelTreemap(dataset) {
@@ -709,8 +711,8 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
                   .append("svg")
                    //.attr("width", width + margin.left + margin.right)
                    //.attr("height", height + margin.top + margin.bottom)
-                   .attr("width", 800)
-                   .attr("height", 800)
+                   .attr("width", 600)
+                   .attr("height", 600)
                    .append("g")
                    //.attr("transform",`translate(${margin.left},${margin.top})`);
     
@@ -727,8 +729,8 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
     
     // colour scale
     const colourScale = d3.scaleThreshold()
-                          .domain([1, 2, 3, 4, 5, 6])
-                          .range(d3.schemeGreens[7]);
+                          .domain([2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5])
+                          .range(d3.schemeGreens[9]);
                           
     // https://codepen.io/robjoeol/pen/qKReXy
     const projection = d3.geoAlbers()
@@ -768,7 +770,7 @@ function roiMap(irelandCounties, unitsByCountyAndYear) {
     
     // https://codepen.io/robjoeol/pen/qKReXy
     labels.append("text")
-          .attr("class", "label")
+          .attr("class", "axis-label")
           .attr("transform", function(d) {
                 return "translate( " + path.centroid(d) + " )"
           })
