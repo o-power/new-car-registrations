@@ -30,6 +30,7 @@ Mobile wireframes are not included as per the project requirements: "Please note
 8. [AWS Cloud](https://aws.amazon.com/cloud9/) was used as the development environment for the project.
 9. [Alteryx Designer](https://www.alteryx.com/) was used to prepare the data. Alteryx Designer is a drag-and-drop tool for rapid data preparation.
 10. [Gimp](https://www.gimp.org) was used to reduce the file size of the car logos for the bump chart.
+11. [Material Icons](https://material.io/resources/icons/?style=baseline) were used in the Data Sources section as bullet icons.
 
 ## Features
 ### Existing
