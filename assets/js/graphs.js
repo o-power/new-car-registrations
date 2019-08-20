@@ -678,20 +678,20 @@ function makeModelTreemap(dataset) {
         .attr("x", function(d){ return d.x0 + 10; }) // + to adjust position (more right)
         .attr("y", function(d){ return d.y0 + 10; }) // + to adjust position (lower)
         .text(function(d) { 
-		    const model = "";
+		    let model = "";
 		    switch(d.data.name) {
 			case "GOLF":
 			    model = "GOLF";
 			    break;
 			case "YARIS":
 			    model = "YARIS";
-                break;
+                	    break;
 			case "TUCSON":
 			    model = "TUCSON";
-                break;
+                	    break;
 			case "FOCUS":
 			    model = "FOCUS";
-                break;
+                	    break;
 			case "QASHQAI":
 			    model = "QASHQAI";
 			    break;
