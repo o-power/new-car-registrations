@@ -670,7 +670,7 @@ function makeModelTreemap(dataset) {
        })
        .style("opacity", function(d) { return opacity(d.data.value); });
     
-     // and to add the text labels
+     // add the text labels
      svg.selectAll(".treemap-text-labels")
         .data(root.leaves())
         .enter()
@@ -704,8 +704,44 @@ function makeModelTreemap(dataset) {
 		    return model; })
 	    .attr("font-size", "12px")
 	    .attr("font-family", "sans-serif")
-     	.attr("fill", "white");
+     	    .attr("fill", "white");
     
+    // add units under the text labels
+     svg.selectAll(".treemap-value-labels")
+        .data(root.leaves())
+        .enter()
+        .append("text")
+        .attr("x", function(d){ return d.x0 + 5; }) // + to adjust position (more right)
+        .attr("y", function(d){ return d.y0 + 30; }) // + to adjust position (lower)
+        .text(function(d) { 
+		    let model = "";
+		    switch(d.data.name) {
+			case "GOLF":
+			    model = d.data.value.toString(); 
+			    break;
+			case "YARIS":
+			    model = d.data.value.toString();
+                	    break;
+			case "TUCSON":
+			    model = d.data.value.toString();
+                	    break;
+			case "FOCUS":
+			    model = d.data.value.toString();
+                	    break;
+			case "QASHQAI":
+			    model = d.data.value.toString();
+			    break;
+			case "OCTAVIA":
+			    model = d.data.value.toString();
+			    break;
+			default:
+			    model = "";
+		    }
+		    return model; })
+	    .attr("font-size", "12px")
+	    .attr("font-family", "sans-serif")
+     	    .attr("fill", "white");
+	
     // tooltips
     const tooltip = d3.select("body")
                       .append("div")
