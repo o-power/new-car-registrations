@@ -50,6 +50,7 @@ Mobile wireframes are not included as per the project requirements: "Please note
 * The functions which build the charts could be made more generic and so reusable.
 * The charts could be made responsive by using the [viewBox attribute](https://medium.com/@louisemoxy/a-simple-way-to-make-d3-js-charts-svgs-responsive-7afb04bc2e4b).
 * Additional charts could be added to examine the trends in body type (MPV, hatchback etc) and engine type (electric, petrol etc).
+* Get the charts to display in Internet Explorer 11.
 
 ## Data Preparation
 Data for each year was downloaded separately from [stats.beepbeep.ie](https://stats.beepbeep.ie/). Alteryx Designer was used to combine and clean the data. For the car colours data the multi-coloured category was substituted for any colour category containing the word "and".
@@ -64,7 +65,9 @@ The HTML was checked using the [W3C Markup Validation Service](https://validator
 
 The CSS was checked using the [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/). This returned one error which said the property "r" does not exist. However, "r" is a property of the circle svg.
 
-The website was tested on Chrome and Firefox. As the project requirements do not require a data dashboard to be responsive, the website was only tested to load on mobile devices and not to be responsive.
+The website was tested on Chrome and Firefox. As the project requirements do not require a data dashboard to be responsive, it was just tested that the website loaded on mobile devices.
+
+The website was also tested on Internet Explorer 11. The charts did not display in this browser.
 
 The links in the Data Sources section were checked to ensure they were working and opening in new tabs.
 
