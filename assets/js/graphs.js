@@ -670,7 +670,43 @@ function makeModelTreemap(dataset) {
        })
        .style("opacity", function(d) { return opacity(d.data.value); });
     
-     // tooltips
+     // and to add the text labels
+     svg.selectAll(".treemap-text-labels")
+        .data(root.leaves())
+        .enter()
+        .append("text")
+        .attr("x", function(d){ return d.x0 + 10; }) // + to adjust position (more right)
+        .attr("y", function(d){ return d.y0 + 10; }) // + to adjust position (lower)
+        .text(function(d) { 
+		    const model = "";
+		    switch(d.data.name) {
+			case "GOLF":
+			    model = "GOLF";
+			    break;
+			case "YARIS":
+			    model = "YARIS";
+                break;
+			case "TUCSON":
+			    model = "TUCSON";
+                break;
+			case "FOCUS":
+			    model = "FOCUS";
+                break;
+			case "QASHQAI":
+			    model = "QASHQAI";
+			    break;
+			case "OCTAVIA":
+			    model = "OCTAVIA";
+			    break;
+			default:
+			    model = "";
+		    }
+		    return model; })
+	    .attr("font-size", "12px")
+	    .attr("font-family", "sans-serif")
+     	.attr("fill", "white");
+    
+    // tooltips
     const tooltip = d3.select("body")
                       .append("div")
                       .attr("class", "tooltip");
